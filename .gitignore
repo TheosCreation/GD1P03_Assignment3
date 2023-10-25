@@ -1,7 +1,1 @@
-﻿################################################################################
-# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
-################################################################################
-
-/.vs
-TowerMasterStudios_Advanced2DGame/x64
-TowerMasterStudios_Advanced2DGame/Debug
+﻿.vs
