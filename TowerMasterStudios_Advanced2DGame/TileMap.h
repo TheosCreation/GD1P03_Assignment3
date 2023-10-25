@@ -1,11 +1,12 @@
 #pragma once
-#include <SFML/Graphics.hpp>
-
+#include "Tile.h"
+#include <cstdlib>  // Include the <cstdlib> header for the rand() function
+#include <ctime>    // Include the <ctime> header for seed initialization
 class TileMap
 {
 	int mapSize = 0;
 	float gridSizeF = 0;
-	std::vector<std::vector<sf::RectangleShape>> tileMap;
+	std::vector<std::vector<Tile>> tileMap;
 	int fromX = 0;
 	int toX = 0;
 	int fromY = 0;

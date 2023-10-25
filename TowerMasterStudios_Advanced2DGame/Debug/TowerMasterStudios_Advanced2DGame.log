@@ -1,22 +1,56 @@
-﻿  TileMap.cpp
-C:\Users\theoj\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(38,45): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+﻿  Tile.cpp
+  TileMap.cpp
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(62,45): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\theoj\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(39,43): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(63,43): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\theoj\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(52,45): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(76,45): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-C:\Users\theoj\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(53,43): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\TileMap.cpp(77,43): warning C4244: '=': conversion from 'T' to 'int', possible loss of data
           with
           [
               T=float
           ]
-  TowerMasterStudios_Advanced2DGame.vcxproj -> C:\Users\theoj\GD1P03_Assignment3\Debug\TowerMasterStudios_Advanced2DGame.exe
+  main.cpp
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\main.cpp(37,67): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\main.cpp(37,53): warning C4244: 'argument': conversion from 'T' to 'unsigned int', possible loss of data
+          with
+          [
+              T=float
+          ]
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\main.cpp(53,23): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\main.cpp(56,35): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\main.cpp(56,20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\main.cpp(76,45): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=unsigned int
+          ]
+C:\Users\yummy hair\GD1P03_Assignment3\TowerMasterStudios_Advanced2DGame\main.cpp(79,45): warning C4244: '=': conversion from 'T' to 'T', possible loss of data
+          with
+          [
+              T=float
+          ]
+          and
+          [
+              T=unsigned int
+          ]
+  Generating Code...
+  TowerMasterStudios_Advanced2DGame.vcxproj -> C:\Users\yummy hair\GD1P03_Assignment3\Debug\TowerMasterStudios_Advanced2DGame.exe

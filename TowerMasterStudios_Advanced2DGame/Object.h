@@ -2,9 +2,8 @@
 #include <SFML/Graphics.hpp>
 
 enum ObjectType {
-	Type_Trap,
-	Type_Player,
-	Type_Goal
+	Type_AllyPiece,
+	Type_EnemyPiece
 };
 
 class Object

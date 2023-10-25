@@ -8,17 +8,10 @@ Object::Object(ObjectType _Type, sf::Vector2f _Position) // constructor. Each ob
 	// this switch statement allows us to change the colour based on the object type, which is part of the object constructor, above. 
 	switch (_Type)
 	{
-
-	case Type_Trap:
-		m_ObjShape.setFillColor(sf::Color::Red);
+	case Type_AllyPiece:
 		break;
-	case Type_Player:
-		m_ObjShape.setFillColor(sf::Color::Blue);
+	case Type_EnemyPiece:
 		break;
-	case Type_Goal:
-		m_ObjShape.setFillColor(sf::Color::Yellow);
-		break;
-
 	default:
 		break;
 	}

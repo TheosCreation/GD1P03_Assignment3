@@ -17,7 +17,7 @@ int main()
 
     // mouse variables
     sf::Vector2i mousePosScreen;
-    sf::Vector2i mousePosWindow;
+    sf::Vector2i mousePosWindow;    
     sf::Vector2f mousePosView;
     sf::Vector2u mousePosGrid;
 
@@ -34,7 +34,7 @@ int main()
     // window stuff
     sf::Vector2f WindowSize(1920, 1080);
 
-    sf::RenderWindow window(sf::VideoMode(WindowSize.x, WindowSize.y), "Chess Tower Masters");
+    sf::RenderWindow window(sf::VideoMode(WindowSize.x, WindowSize.y), "Pirate Minesweeper");
     window.setFramerateLimit(60);
 
     // viewport stff
@@ -47,7 +47,7 @@ int main()
     // game objects
 
     // tilemap
-    int mapsize = 20;
+    int mapsize = 25;
     TileMap tileMap(mapsize, gridSizeF);
 
     int tilemapcenter = (mapsize * gridSizeF) / 2 - 1;
@@ -72,10 +72,12 @@ int main()
         mousePosWindow = sf::Mouse::getPosition(window);
         window.setView(view);
         mousePosView = window.mapPixelToCoords(mousePosWindow);
-        if(mousePosView.x >= 0.0f)
+        if(mousePosView.x >= 0.0f){
             mousePosGrid.x = mousePosView.x / gridSizeU;
-        if(mousePosView.y >= 0.0f)
+        }
+        if(mousePosView.y >= 0.0f){
             mousePosGrid.y = mousePosView.y / gridSizeU;
+        }
 
         // update game
         tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
@@ -92,8 +94,9 @@ int main()
         sf::Event event;
         while (window.pollEvent(event))
         {
-            if (event.type == sf::Event::Closed)
+            if (event.type == sf::Event::Closed){
                 window.close();
+            }
         }
 
         //Update
