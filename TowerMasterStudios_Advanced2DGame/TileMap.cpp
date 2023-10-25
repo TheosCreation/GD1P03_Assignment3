@@ -30,7 +30,7 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
                 tileMap[x][y].m_Tile.setFillColor(sf::Color::Blue);
                 break;
             case Type_Mine:
-                tileMap[x][y].m_Tile.setFillColor(sf::Color::Cyan);
+                tileMap[x][y].m_Tile.setFillColor(sf::Color::Cyan); 
                 break;
             case Type_Treasure:
                 tileMap[x][y].m_Tile.setFillColor(sf::Color::Yellow);
