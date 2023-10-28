@@ -23,9 +23,11 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
             if (Seed % 5 == 0) {
                 tileMap[x][y].m_TileType = TileType(rand() % 2);
             }
+            //summons tilemap tiles? i think
  
             switch (tileMap[x][y].m_TileType)
             {
+                //defines property of tiles 
             case Type_Water:
                 tileMap[x][y].m_Tile.setFillColor(sf::Color::Blue);
                 break;
@@ -63,26 +65,39 @@ void TileMap::update(sf::View _view)
     toX = _view.getCenter().x / gridSizeF + 11;
 
     if (fromX < 0)
+    {
         fromX = 0;
+    }
     else if (fromX >= mapSize)
+    {
         fromX = mapSize;
+    }
 
-    if (toX < 0)
+    if (toX < 0){
         toX = 0;
-    else if (toX >= mapSize)
+    }
+    else if (toX >= mapSize) {
         toX = mapSize;
-
+    }
     // tile map position y updates
     fromY = _view.getCenter().y / gridSizeF - 6;
     toY = _view.getCenter().y / gridSizeF + 7;
 
     if (fromY < 0)
+    {
         fromY = 0;
+    }
     else if (fromY >= mapSize)
+    {
         fromY = mapSize;
+    }
 
     if (toY < 0)
+    {
         toY = 0;
+    }
     else if (toY >= mapSize)
+    {
         toY = mapSize;
+    }   
 }

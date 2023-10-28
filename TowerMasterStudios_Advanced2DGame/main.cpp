@@ -2,9 +2,14 @@
 #include "Object.h"
 #include "TileMap.h"
 
-
+#include <iostream>
 // ALWAYS BUILD IN RELEASE, AT LEAST ONCE A DAY. 
-
+/*
+minesweeper pirate game
+walk around, find tresure using mindsweeper strats and avoid mines 
+its a vs game a competition
+\ai just moves randomly (haha they are stupid)
+*/
 int main()
 {
     // game variables
@@ -15,6 +20,22 @@ int main()
     float gridSizeF = 100.0f;
     unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
 
+    // object variables 
+    Object AllyObjArray[20];
+    Object EnemyObjArray[20];
+    int ArrayPos = 0;
+    for (int i = 1; i < 3; i++)
+    {
+        for (int j = 1; j < 11; j++)
+        {
+            
+            AllyObjArray[ArrayPos].initObject(Type_AllyPiece, sf::Vector2f(j, i + 10), 100.0f);
+            EnemyObjArray[ArrayPos].initObject(Type_EnemyPiece, sf::Vector2f(j, i), 100.0f);
+            ArrayPos++;
+           
+        }
+    }
+  
     // mouse variables
     sf::Vector2i mousePosScreen;
     sf::Vector2i mousePosWindow;    
@@ -60,7 +81,7 @@ int main()
     tileSelector.setFillColor(sf::Color::Transparent);
     tileSelector.setOutlineThickness(1.0f);
     tileSelector.setOutlineColor(sf::Color::Green);
-
+    int a = 0;
     while (window.isOpen())
     {
         // update dt
@@ -102,7 +123,7 @@ int main()
         
 
         //Update Input
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+       if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
             view.move(-viewSpeed * _dt, 0.0f);
         }else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
             view.move(viewSpeed * _dt, 0.0f);
@@ -122,7 +143,19 @@ int main()
 
         // draw game
         tileMap.draw(&window);
-
+ 
+        for (Object obj : EnemyObjArray)
+        {
+            
+          
+            obj.draw(&window);
+        } 
+    
+        for (Object obj : AllyObjArray)
+        {
+            obj.Update(mousePosGrid);
+            obj.draw(&window);
+        }
         window.draw(tileSelector);
 
         window.setView(window.getDefaultView());
