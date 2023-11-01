@@ -22,10 +22,11 @@ public:
 	Object();
 	~Object();
 
-	void Update(sf::Vector2u _GridMousePos);
+	void Update();
+	void Update(sf::Vector2u _GridMousePos, float _gridSizeF);
 	void Input();
 	void initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
 	void draw(sf::RenderWindow* _window);
-
+	void move(sf::Vector2f _ToPosition);
 };
 

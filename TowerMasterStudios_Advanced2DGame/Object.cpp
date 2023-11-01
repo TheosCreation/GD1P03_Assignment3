@@ -48,30 +48,37 @@ void Object::draw(sf::RenderWindow* _window)
 {
 	_window->draw(m_ObjShape);
 }
-void Object::Update(sf::Vector2u _GridMousePos)
+void Object::move(sf::Vector2f _ToPosition)
+{
+}
+void Object::Update()
+{
+}
+void Object::Update(sf::Vector2u _GridMousePos, float _gridSizeF)
 {
 	if (m_ObjType == Type_AllyPiece) {
-
+		//is there a better mouse check?
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			if (_GridMousePos == sf::Vector2u(m_TilePos.x, m_TilePos.y)) {
+			if (_GridMousePos == sf::Vector2u(m_TilePos.x, m_TilePos.y) && IsSelected == false) {
 				//select this as player
-
 				IsSelected = true;
+				//sets the postion of the player when confirming location
+				m_ObjShape.setPosition(sf::Vector2f(m_TilePos.x * _gridSizeF + _gridSizeF / 2, m_TilePos.y * _gridSizeF + _gridSizeF / 2));
 			}
 			else {
 				IsSelected = false;
 			}
-		}	
+		}
 		if (IsSelected) {
 			m_ObjShape.setFillColor(sf::Color::Yellow);
 			m_ObjShape.setSize(sf::Vector2f(100, 100));
-			
+			//updates pos when selected
+			m_TilePos = sf::Vector2f(_GridMousePos);
 		}
 		else {
-			
+
 			m_ObjShape.setFillColor(sf::Color::Green);
 			m_ObjShape.setSize(sf::Vector2f(30, 30));
 		}
-
 	}
 }

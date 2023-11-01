@@ -21,20 +21,11 @@ int main()
     unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
 
     // object variables 
-    Object AllyObjArray[20];
-    Object EnemyObjArray[20];
-    int ArrayPos = 0;
-    for (int i = 1; i < 3; i++)
-    {
-        for (int j = 1; j < 11; j++)
-        {
-            
-            AllyObjArray[ArrayPos].initObject(Type_AllyPiece, sf::Vector2f(j, i + 10), 100.0f);
-            EnemyObjArray[ArrayPos].initObject(Type_EnemyPiece, sf::Vector2f(j, i), 100.0f);
-            ArrayPos++;
-           
-        }
-    }
+    Object AllyObj;
+    Object EnemyObj;
+
+    AllyObj.initObject(Type_AllyPiece, sf::Vector2f(1, 10), 100.0f);
+    EnemyObj.initObject(Type_EnemyPiece, sf::Vector2f(1, 1), 100.0f);
   
     // mouse variables
     sf::Vector2i mousePosScreen;
@@ -144,18 +135,11 @@ int main()
         // draw game
         tileMap.draw(&window);
  
-        for (Object obj : EnemyObjArray)
-        {
-            
-          
-            obj.draw(&window);
-        } 
-    
-        for (Object obj : AllyObjArray)
-        {
-            obj.Update(mousePosGrid);
-            obj.draw(&window);
-        }
+        AllyObj.Update(mousePosGrid, gridSizeF);
+        AllyObj.draw(&window);
+
+        EnemyObj.Update();
+        EnemyObj.draw(&window);
         window.draw(tileSelector);
 
         window.setView(window.getDefaultView());
