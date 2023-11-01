@@ -19,17 +19,24 @@ void Controler::InstObjects()
 
 void Controler::SelectObj(sf::Vector2u _GridMousePos)
 {
+    bool ObjectHasBeenSelected = false;
     for (Object* obj : AllyObjArray) {
         if (_GridMousePos == sf::Vector2u(obj->m_TilePos.x, obj->m_TilePos.y)) {
-             m_IsSelected = true;
+             m_HasSelected = true;
              m_ObjectSelected = obj;
              obj->IsSelected = true;
+             ObjectHasBeenSelected = true;
 
             
         }
         else {
             obj->IsSelected = false;
         }
+    }
+    if(!ObjectHasBeenSelected&& m_HasSelected){
+        m_ObjectSelected->m_TilePos = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);    
+        m_ObjectSelected->m_ObjShape.setPosition(m_ObjectSelected->m_TilePos.x*100+35, m_ObjectSelected->m_TilePos.y*100+35);
+        m_HasSelected = false;
     }
     
 }

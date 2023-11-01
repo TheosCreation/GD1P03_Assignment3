@@ -9,10 +9,10 @@ enum ObjectType {
 class Object
 {
 private:
-	sf::Vector2f m_Pos;
+
 	sf::Vector2f m_ObjSpeed;
 public:
-
+	sf::Vector2f m_Pos;
 	sf::RectangleShape m_ObjShape;
 	ObjectType m_ObjType;
 	
@@ -22,7 +22,7 @@ public:
 	Object(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
 	~Object();
 
-	void Update(sf::Vector2u _GridMousePos);
+	void Update();
 	void Input();
 	//void initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
 	void draw(sf::RenderWindow* _window);

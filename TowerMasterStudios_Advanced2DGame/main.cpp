@@ -158,7 +158,7 @@ int main()
     */
         for (Object* obj : ObjHandler.AllyObjArray)
         {
-            obj->Update(mousePosGrid);
+            obj->Update();
             obj->draw(&window);
         }
         window.draw(tileSelector);

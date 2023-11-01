@@ -48,31 +48,13 @@ void Object::draw(sf::RenderWindow* _window)
 {
 	_window->draw(m_ObjShape);
 }
-void Object::Update(sf::Vector2u _GridMousePos)
-{
-	
-	/*if (m_ObjType == Type_AllyPiece) {
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
-			if (_GridMousePos == sf::Vector2u(m_TilePos.x, m_TilePos.y)) {
-				//select this as player
-
-				IsSelected = true;
-			}
-			else {
-				IsSelected = false;
-			}
-		}	*/
-		if (IsSelected) {
-			m_ObjShape.setFillColor(sf::Color::Yellow);
-			m_ObjShape.setSize(sf::Vector2f(100, 100));
-			
-		}
-		else {
-			
-			m_ObjShape.setFillColor(sf::Color::Green);
-			m_ObjShape.setSize(sf::Vector2f(30, 30));
-		}
-
-	//}
+void Object::Update()
+{	
+	if (IsSelected) {
+		m_ObjShape.setFillColor(sf::Color::Yellow);
+		
+	}
+	else {
+		m_ObjShape.setFillColor(sf::Color::Green);
+	}
 }
