@@ -57,7 +57,7 @@ int main()
     // window stuff
     sf::Vector2f WindowSize(1920, 1080);
 
-    sf::RenderWindow window(sf::VideoMode(WindowSize.x, WindowSize.y), "Chess Tower Masters");
+    sf::RenderWindow window(sf::VideoMode(WindowSize.x, WindowSize.y), "Pirate Minesweeper");
     window.setFramerateLimit(60);
 
     // viewport stff
