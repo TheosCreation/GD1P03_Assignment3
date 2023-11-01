@@ -1,26 +1,7 @@
 #include "Object.h"
 
 
-Object::Object() // constructor. Each object has a type and position. 
-{
-	
-}
-
-Object::~Object()
-{
-}
-
-
-
-
-
-void Object::Input()
-{
-	m_ObjSpeed = sf::Vector2f(0.5, 0);
-
-	m_ObjShape.move(m_ObjSpeed);
-}
-void Object::initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF)
+Object::Object(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF) // constructor. Each object has a type and position. 
 {
 	m_ObjShape.setSize(sf::Vector2f(30, 30));
 	m_TilePos = _Position;
@@ -44,13 +25,33 @@ void Object::initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSiz
 		break;
 	}
 }
+
+Object::~Object()
+{
+}
+
+
+
+
+
+void Object::Input()
+{
+	m_ObjSpeed = sf::Vector2f(0.5, 0);
+
+	m_ObjShape.move(m_ObjSpeed);
+}
+//void Object::initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF)
+//{
+//	
+//}
 void Object::draw(sf::RenderWindow* _window)
 {
 	_window->draw(m_ObjShape);
 }
 void Object::Update(sf::Vector2u _GridMousePos)
 {
-	if (m_ObjType == Type_AllyPiece) {
+	
+	/*if (m_ObjType == Type_AllyPiece) {
 
 		if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
 			if (_GridMousePos == sf::Vector2u(m_TilePos.x, m_TilePos.y)) {
@@ -61,7 +62,7 @@ void Object::Update(sf::Vector2u _GridMousePos)
 			else {
 				IsSelected = false;
 			}
-		}	
+		}	*/
 		if (IsSelected) {
 			m_ObjShape.setFillColor(sf::Color::Yellow);
 			m_ObjShape.setSize(sf::Vector2f(100, 100));
@@ -73,5 +74,5 @@ void Object::Update(sf::Vector2u _GridMousePos)
 			m_ObjShape.setSize(sf::Vector2f(30, 30));
 		}
 
-	}
+	//}
 }

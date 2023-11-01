@@ -19,12 +19,12 @@ public:
 	sf::Vector2f m_TilePos; // change to set spots 
 	bool IsSelected = false;
 
-	Object();
+	Object(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
 	~Object();
 
 	void Update(sf::Vector2u _GridMousePos);
 	void Input();
-	void initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
+	//void initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
 	void draw(sf::RenderWindow* _window);
 
 };

@@ -1,5 +1,5 @@
 #include <sstream>
-#include "Object.h"
+#include "Controler.h"
 #include "TileMap.h"
 
 #include <iostream>
@@ -19,22 +19,21 @@ int main()
     // grid variables
     float gridSizeF = 100.0f;
     unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
-
+    Controler ObjHandler;
     // object variables 
-    Object AllyObjArray[20];
-    Object EnemyObjArray[20];
+  /*  Object EnemyObjArray[20];
     int ArrayPos = 0;
     for (int i = 1; i < 3; i++)
     {
         for (int j = 1; j < 11; j++)
         {
             
-            AllyObjArray[ArrayPos].initObject(Type_AllyPiece, sf::Vector2f(j, i + 10), 100.0f);
+         
             EnemyObjArray[ArrayPos].initObject(Type_EnemyPiece, sf::Vector2f(j, i), 100.0f);
             ArrayPos++;
            
         }
-    }
+    }*/
   
     // mouse variables
     sf::Vector2i mousePosScreen;
@@ -51,6 +50,9 @@ int main()
     text.setFillColor(sf::Color::Green);
     text.setFont(font);
     text.setPosition(20.0f, 20.0f);
+
+    //controler
+    ObjHandler.InstObjects();
 
     // window stuff
     sf::Vector2f WindowSize(1920, 1080);
@@ -117,6 +119,9 @@ int main()
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            if (event.type == sf::Event::MouseButtonPressed) {
+                ObjHandler.SelectObj(mousePosGrid);
+            }
         }
 
         //Update
@@ -144,17 +149,17 @@ int main()
         // draw game
         tileMap.draw(&window);
  
-        for (Object obj : EnemyObjArray)
+     /*   for (Object obj : EnemyObjArray)
         {
             
           
             obj.draw(&window);
         } 
-    
-        for (Object obj : AllyObjArray)
+    */
+        for (Object* obj : ObjHandler.AllyObjArray)
         {
-            obj.Update(mousePosGrid);
-            obj.draw(&window);
+            obj->Update(mousePosGrid);
+            obj->draw(&window);
         }
         window.draw(tileSelector);
 
