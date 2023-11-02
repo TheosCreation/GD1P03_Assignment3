@@ -1,9 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+
 #include <iostream>
 enum ObjectType {
 	Type_AllyPiece,
 	Type_EnemyPiece
+};
+
+enum UnitType {
+	Type_Cruise,
+	Type_JetSki,
+	Type_PirateShip
 };
 
 class Object
@@ -15,11 +22,13 @@ public:
 	sf::Vector2f m_Pos;
 	sf::RectangleShape m_ObjShape;
 	ObjectType m_ObjType;
+	UnitType m_UnitType;
 	
 	sf::Vector2f m_TilePos; // change to set spots 
 	bool IsSelected = false;
-
-	Object(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
+	int m_MaxMoveDistance = 1;
+	sf::Color m_Color;
+	Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, float _gridSizeF);
 	~Object();
 
 	void Update();
