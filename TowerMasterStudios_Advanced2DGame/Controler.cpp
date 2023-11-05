@@ -38,10 +38,23 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
             m_ObjectSelected->m_TilePos = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);
             m_ObjectSelected->m_ObjShape.setPosition(m_ObjectSelected->m_TilePos.x * 100 + 35, m_ObjectSelected->m_TilePos.y * 100 + 35);
             m_HasSelected = false;
+            m_MovedToTile = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);
         }
         else {
             m_HasSelected = false;
         }
     }
     
+}
+
+void Controler::Damage(int _Damage)
+{
+    m_Health -= _Damage;
+    if (true) {
+        std::cout << "dead";
+    }
+}
+void Controler::Treasure(int _Money)
+{
+    m_Money += _Money;
 }

@@ -140,7 +140,7 @@ int main()
         }
 
         // tilemap update
-        tileMap.update(view);
+        tileMap.update(view, ObjHandler);
 
         // draw
         window.clear();

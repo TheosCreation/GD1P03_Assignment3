@@ -57,8 +57,15 @@ void TileMap::draw(sf::RenderWindow* _window)
     }
 }
 
-void TileMap::update(sf::View _view)
+void TileMap::update(sf::View _view, Controler _ctrl)
 {
+    for (int x = 0; x < mapSize; x++)
+    {
+        for (int y = 0; y < mapSize; y++)
+        {
+            tileMap[x][y].ObjInTile(_ctrl);
+        }
+    }
     
     // tile map position x updates
     fromX = _view.getCenter().x / gridSizeF - 10;
