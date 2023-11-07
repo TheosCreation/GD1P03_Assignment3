@@ -12,7 +12,7 @@ public:
 
 	void InstObjects();
 	void SelectObj(sf::Vector2u _GridMousePos);
-	void Damage(int _Damage);
+	void Destroy();
 	void Treasure(int _Treasure);
 };
 

@@ -16,11 +16,8 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
         tileMap[x].resize(mapSize);
         for (int y = 0; y < mapSize; y++)
         {
-            tileMap[x][y].m_Tile.setSize(sf::Vector2f(gridSizeF, gridSizeF));
-            tileMap[x][y].m_Tile.setOutlineThickness(1.0f);
-            tileMap[x][y].m_Tile.setOutlineColor(sf::Color::Black);
+            tileMap[x][y].m_TileSprite.setPosition(x * gridSizeF, y * gridSizeF);
             tileMap[x][y].m_Pos = sf::Vector2i(x, y);
-            tileMap[x][y].m_Tile.setPosition(x * gridSizeF, y * gridSizeF);
             int Seed = rand() % 100;
             if (Seed % 5 == 0) {
                 tileMap[x][y].m_TileType = TileType(rand() % 2);
@@ -31,13 +28,13 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
             {
                 //defines property of tiles 
             case Type_Water:
-                tileMap[x][y].m_Tile.setFillColor(sf::Color::Blue);
+                tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
                 break;
             case Type_Mine:
-                tileMap[x][y].m_Tile.setTexture(BombTexture);
+                tileMap[x][y].SetSprite("Assets/Sprites/Bomb.png");
                 break;
             case Type_Treasure:
-                tileMap[x][y].m_Tile.setFillColor(sf::Color::Yellow);
+                tileMap[x][y].SetSprite("Assets/Sprites/Treasure.png");
                 break;
             default:
                 break;
@@ -54,7 +51,8 @@ void TileMap::draw(sf::RenderWindow* _window)
     {
         for (int y = fromY; y < toY; y++)
         {
-            _window->draw(tileMap[x][y].m_Tile);
+            //_window->draw(tileMap[x][y].m_Tile);
+            _window->draw(tileMap[x][y].m_TileSprite);
         }
     }
 }
@@ -70,8 +68,8 @@ void TileMap::update(sf::View _view, Controler* _ctrl)
     }
     
     // tile map position x updates
-    fromX = _view.getCenter().x / gridSizeF - 10;
-    toX = _view.getCenter().x / gridSizeF + 11;
+    fromX = _view.getCenter().x / gridSizeF - 15;
+    toX = _view.getCenter().x / gridSizeF + 16;
 
     if (fromX < 0)
     {
@@ -89,8 +87,8 @@ void TileMap::update(sf::View _view, Controler* _ctrl)
         toX = mapSize;
     }
     // tile map position y updates
-    fromY = _view.getCenter().y / gridSizeF - 6;
-    toY = _view.getCenter().y / gridSizeF + 7;
+    fromY = _view.getCenter().y / gridSizeF - 10;
+    toY = _view.getCenter().y / gridSizeF + 11;
 
     if (fromY < 0)
     {

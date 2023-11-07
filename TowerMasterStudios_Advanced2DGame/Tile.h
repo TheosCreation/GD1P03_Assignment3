@@ -14,8 +14,10 @@ public:
 	TileType m_TileType = Type_Water;
 	sf::RectangleShape m_Tile; 
 	sf::Vector2i m_Pos = { 0,0 };
-	
+	sf::Texture m_TileTexture;
+	sf::Sprite m_TileSprite;
 	bool Active = true;
 	void ObjInTile(Controler* _ObjHandler);
+	void SetSprite(sf::String _Path);
 };
 

@@ -4,7 +4,7 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 {
 	m_ObjShape.setSize(sf::Vector2f(30, 30));
 	m_TilePos = _Position;
-	m_Pos = sf::Vector2f(_Position.x * _gridSizeF + 35, _Position.y * _gridSizeF + 35);
+	m_Pos = sf::Vector2f(_Position.x * _gridSizeF + 19.2, _Position.y * _gridSizeF + 19.2);
 	m_ObjShape.setPosition(m_Pos);
 
 	// this switch statement allows us to change the colour based on the object type, which is part of the object constructor, above. 

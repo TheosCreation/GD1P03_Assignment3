@@ -7,7 +7,7 @@ void Controler::InstObjects()
     {
         for (int j = 1; j < 11; j++)
         {
-            Object* NewObject = new Object(Type_AllyPiece, Type_Cruise, sf::Vector2f(j, i + 10), 100.0f);
+            Object* NewObject = new Object(Type_AllyPiece, Type_Cruise, sf::Vector2f(j, i + 10), 64.0f);
             //init an object
             AllyObjArray[ArrayPos] =NewObject;
             //assign object to this
@@ -37,7 +37,7 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
         if (MoveDistance.x <= m_ObjectSelected->m_MaxMoveDistance && MoveDistance.y <= m_ObjectSelected->m_MaxMoveDistance) {
 
             m_ObjectSelected->m_TilePos = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);
-            m_ObjectSelected->m_ObjShape.setPosition(m_ObjectSelected->m_TilePos.x * 100 + 35, m_ObjectSelected->m_TilePos.y * 100 + 35);
+            m_ObjectSelected->m_ObjShape.setPosition(m_ObjectSelected->m_TilePos.x * 64 + 19.2, m_ObjectSelected->m_TilePos.y * 64 + 19.2);
             m_HasSelected = false;
             m_MovedToTile = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);
             
@@ -49,13 +49,12 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
     
 }
 
-void Controler::Damage(int _Damage)
+void Controler::Destroy()
 {
-    //moves obj off screen
     m_ObjectSelected->m_TilePos.x = -1;
     m_ObjectSelected->m_TilePos.y = -1;
     m_ObjectSelected->m_ObjShape.setPosition(-1,-1);
-    std::cout << "dead";
+    m_ObjectSelected->m_ObjShape.setSize(sf::Vector2f(0,0));
 }
 void Controler::Treasure(int _Treasure)
 {

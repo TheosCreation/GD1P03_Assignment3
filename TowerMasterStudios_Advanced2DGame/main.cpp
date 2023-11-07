@@ -17,7 +17,7 @@ int main()
     sf::Clock dtClock;
 
     // grid variables
-    float gridSizeF = 100.0f;
+    float gridSizeF = 64.0f;
     unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
     Controler ObjHandler;
     // object variables 

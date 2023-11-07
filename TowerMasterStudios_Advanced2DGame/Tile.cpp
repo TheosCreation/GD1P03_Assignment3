@@ -8,13 +8,13 @@ void Tile::ObjInTile(Controler* _ObjHandler)
 		{
 		case Type_Mine:
 			if (Active) {
-				_ObjHandler->Damage(10);
+				_ObjHandler->Destroy();
 				Active = false;
 			}
 			break;
 		case Type_Treasure:
 			if (Active) {
-				_ObjHandler->Treasure(10);
+				_ObjHandler->Treasure(1);
 				Active = false;
 			}
 			break;
@@ -26,4 +26,10 @@ void Tile::ObjInTile(Controler* _ObjHandler)
 		}
 	}
 	
+}
+
+void Tile::SetSprite(sf::String _Path)
+{
+	m_TileTexture.loadFromFile(_Path);
+	m_TileSprite.setTexture(m_TileTexture);
 }
