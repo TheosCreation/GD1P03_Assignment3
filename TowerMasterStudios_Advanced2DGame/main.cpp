@@ -109,7 +109,8 @@ int main()
         ss << "Screen: " << mousePosScreen.x << " " << mousePosScreen.y << "\n"
             << "Window: " << mousePosWindow.x << " " << mousePosWindow.y << "\n"
             << "View: " << mousePosView.x << " " << mousePosView.y << "\n"
-            << "Grid: " << mousePosGrid.x << " " << mousePosGrid.y << "\n";
+            << "Grid: " << mousePosGrid.x << " " << mousePosGrid.y << "\n"
+            << "Treasure: " << ObjHandler.m_Treasure << "\n";
 
         text.setString(ss.str());
 
@@ -140,7 +141,7 @@ int main()
         }
 
         // tilemap update
-        tileMap.update(view, ObjHandler);
+        tileMap.update(view, &ObjHandler);
 
         // draw
         window.clear();

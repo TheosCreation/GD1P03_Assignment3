@@ -14,6 +14,8 @@ public:
 	TileType m_TileType = Type_Water;
 	sf::RectangleShape m_Tile; 
 	sf::Vector2i m_Pos = { 0,0 };
-	void ObjInTile(Controler _ObjHandler);
+	
+	bool Active = true;
+	void ObjInTile(Controler* _ObjHandler);
 };
 

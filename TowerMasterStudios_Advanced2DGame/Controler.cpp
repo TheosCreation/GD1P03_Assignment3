@@ -44,7 +44,6 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
         }
         else {
             m_HasSelected = false;
-            m_DamageTaken = false;
         }
     }
     
@@ -52,14 +51,13 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
 
 void Controler::Damage(int _Damage)
 {
-  
-    if (!m_DamageTaken) {
-        m_Health -= _Damage;
-        std::cout << "dead";
-        m_DamageTaken = true;
-    }
+    //moves obj off screen
+    m_ObjectSelected->m_TilePos.x = -1;
+    m_ObjectSelected->m_TilePos.y = -1;
+    m_ObjectSelected->m_ObjShape.setPosition(-1,-1);
+    std::cout << "dead";
 }
-void Controler::Treasure(int _Money)
+void Controler::Treasure(int _Treasure)
 {
-    m_Money += _Money;
+    m_Treasure += _Treasure;
 }

@@ -2,6 +2,9 @@
 
 TileMap::TileMap(int _mapSize, float _gridSizeF)
 {
+    if (BombTexture) {
+        BombTexture->loadFromFile("Assets/Sprites/Bomb.png");
+    }
     std::srand(static_cast<unsigned int>(std::time(nullptr)));
 
     gridSizeF = _gridSizeF;
@@ -14,7 +17,6 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
         for (int y = 0; y < mapSize; y++)
         {
             tileMap[x][y].m_Tile.setSize(sf::Vector2f(gridSizeF, gridSizeF));
-           
             tileMap[x][y].m_Tile.setOutlineThickness(1.0f);
             tileMap[x][y].m_Tile.setOutlineColor(sf::Color::Black);
             tileMap[x][y].m_Pos = sf::Vector2i(x, y);
@@ -32,7 +34,7 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
                 tileMap[x][y].m_Tile.setFillColor(sf::Color::Blue);
                 break;
             case Type_Mine:
-                tileMap[x][y].m_Tile.setFillColor(sf::Color::Cyan); 
+                tileMap[x][y].m_Tile.setTexture(BombTexture);
                 break;
             case Type_Treasure:
                 tileMap[x][y].m_Tile.setFillColor(sf::Color::Yellow);
@@ -57,7 +59,7 @@ void TileMap::draw(sf::RenderWindow* _window)
     }
 }
 
-void TileMap::update(sf::View _view, Controler _ctrl)
+void TileMap::update(sf::View _view, Controler* _ctrl)
 {
     for (int x = 0; x < mapSize; x++)
     {
