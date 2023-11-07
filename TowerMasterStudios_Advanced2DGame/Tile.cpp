@@ -24,6 +24,21 @@ void Tile::ObjInTile(Controler* _ObjHandler)
 		default:
 			break;
 		}
+		m_MineCount = 0;
+		m_TresureCount = 0;
+		for (int i = 0; i < 8; i++)
+		{
+			if(m_Neighbours[i]!=NULL){
+				if (m_Neighbours[i]->m_TileType == Type_Mine) {
+					m_MineCount++;
+				}			
+				if (m_Neighbours[i]->m_TileType == Type_Treasure) {
+					m_TresureCount++;
+				}
+			}
+		}
+		std::cout << m_MineCount << std::endl;
+
 	}
 	
 }

@@ -40,6 +40,7 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
             m_ObjectSelected->m_ObjShape.setPosition(m_ObjectSelected->m_TilePos.x * 64 + 19.2, m_ObjectSelected->m_TilePos.y * 64 + 19.2);
             m_HasSelected = false;
             m_MovedToTile = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);
+        
             
         }
         else {

@@ -34,6 +34,7 @@ int main()
            
         }
     }*/
+    bool testvar = true;
   
     // mouse variables
     sf::Vector2i mousePosScreen;
@@ -103,7 +104,18 @@ int main()
         }
         // update game
         tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
+    /*
+        if(testvar){
+        for (int i = 0; i < 8; i++)
+        {
 
+            if(tileMap.tileMap[12][6].m_Neighbours[i]!=NULL){
+            std::cout << tileMap.tileMap[2][2].m_Neighbours << std::endl;
+            }
+        }
+        testvar = false;
+        }
+*/
         // update ui
         std::stringstream ss;
         ss << "Screen: " << mousePosScreen.x << " " << mousePosScreen.y << "\n"

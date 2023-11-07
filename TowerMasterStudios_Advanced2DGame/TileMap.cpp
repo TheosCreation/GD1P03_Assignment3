@@ -18,6 +18,8 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
         {
             tileMap[x][y].m_TileSprite.setPosition(x * gridSizeF, y * gridSizeF);
             tileMap[x][y].m_Pos = sf::Vector2i(x, y);
+           
+       
             int Seed = rand() % 100;
             if (Seed % 5 == 0) {
                 tileMap[x][y].m_TileType = TileType(rand() % 2);
@@ -41,6 +43,32 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
             }
          
             
+        }
+    }
+    for (int x = 0; x < mapSize; x++)
+    {
+        for (int y = 0; y < mapSize; y++)
+        {
+            int NeighbourCount = 0;
+            for (int i = -1; i < 2; i++)
+            {
+                for (int j = -1; j < 2; j++)
+                {
+
+                    if (i != 0 || j != 0) {
+
+                        int newX = x + i;
+                        int newY = y + j;
+
+                        if (newX >= 0 && newX < mapSize && newY >= 0 && newY < mapSize)
+                        {
+                            tileMap[x][y].m_Neighbours[NeighbourCount] = &tileMap[newX][newY];
+                            NeighbourCount++;
+                        }
+                    }
+                }
+            }
+            std::cout << NeighbourCount << std::endl;
         }
     }
 }

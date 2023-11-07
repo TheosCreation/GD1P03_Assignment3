@@ -16,8 +16,11 @@ public:
 	sf::Vector2i m_Pos = { 0,0 };
 	sf::Texture m_TileTexture;
 	sf::Sprite m_TileSprite;
+	Tile *m_Neighbours[8];
 	bool Active = true;
 	void ObjInTile(Controler* _ObjHandler);
 	void SetSprite(sf::String _Path);
+	int m_MineCount = 0;
+	int m_TresureCount = 0;
 };
 
