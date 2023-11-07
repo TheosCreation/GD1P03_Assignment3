@@ -2,6 +2,8 @@
 #include "Object.h"
 class Controler 
 {
+private:
+	bool m_DamageTaken = false;
 public:
 	Object *AllyObjArray[20];
 	Object* m_ObjectSelected;

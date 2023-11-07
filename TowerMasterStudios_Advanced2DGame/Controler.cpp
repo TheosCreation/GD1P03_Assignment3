@@ -32,6 +32,7 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
         }
     }
     if(!ObjectHasBeenSelected&& m_HasSelected){
+        //moves ovject
         sf::Vector2f MoveDistance = sf::Vector2f(abs(m_ObjectSelected->m_TilePos.x - _GridMousePos.x), abs(m_ObjectSelected->m_TilePos.y - _GridMousePos.y));
         if (MoveDistance.x <= m_ObjectSelected->m_MaxMoveDistance && MoveDistance.y <= m_ObjectSelected->m_MaxMoveDistance) {
 
@@ -39,9 +40,11 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
             m_ObjectSelected->m_ObjShape.setPosition(m_ObjectSelected->m_TilePos.x * 100 + 35, m_ObjectSelected->m_TilePos.y * 100 + 35);
             m_HasSelected = false;
             m_MovedToTile = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);
+            
         }
         else {
             m_HasSelected = false;
+            m_DamageTaken = false;
         }
     }
     
@@ -49,9 +52,11 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
 
 void Controler::Damage(int _Damage)
 {
-    m_Health -= _Damage;
-    if (true) {
+  
+    if (!m_DamageTaken) {
+        m_Health -= _Damage;
         std::cout << "dead";
+        m_DamageTaken = true;
     }
 }
 void Controler::Treasure(int _Money)
