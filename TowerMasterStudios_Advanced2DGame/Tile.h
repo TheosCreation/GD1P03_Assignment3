@@ -20,6 +20,7 @@ public:
 	bool Active = true;
 	void ObjInTile(Controler* _ObjHandler);
 	void SetSprite(sf::String _Path);
+	void SetNeighbours();
 	int m_MineCount = 0;
 	int m_TresureCount = 0;
 };

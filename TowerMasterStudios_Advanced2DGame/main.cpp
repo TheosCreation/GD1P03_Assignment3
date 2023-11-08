@@ -85,6 +85,16 @@ int main()
     tileSelector.setOutlineThickness(1.0f);
     tileSelector.setOutlineColor(sf::Color::Green);
     int a = 0;
+
+    for (int x = 0; x < tileMap.mapSize; x++)
+    {
+  
+        for (int y = 0; y < tileMap.mapSize; y++)
+        {
+            tileMap.tileMap[x][y].SetNeighbours();
+        }
+
+    }
     while (window.isOpen())
     {
         // update dt
@@ -117,12 +127,20 @@ int main()
         }
 */
         // update ui
+        int DisplayMineCount = 0;
+        int DisplayTreasureCount = 0;
+        if (mousePosGrid.x < tileMap.mapSize && mousePosGrid.y < tileMap.mapSize) {
+            DisplayMineCount = tileMap.tileMap[mousePosGrid.x][mousePosGrid.y].m_MineCount;
+            DisplayTreasureCount = tileMap.tileMap[mousePosGrid.x][mousePosGrid.y].m_TresureCount;
+        }
         std::stringstream ss;
         ss << "Screen: " << mousePosScreen.x << " " << mousePosScreen.y << "\n"
             << "Window: " << mousePosWindow.x << " " << mousePosWindow.y << "\n"
             << "View: " << mousePosView.x << " " << mousePosView.y << "\n"
             << "Grid: " << mousePosGrid.x << " " << mousePosGrid.y << "\n"
-            << "Treasure: " << ObjHandler.m_Treasure << "\n";
+            << "Treasure: " << ObjHandler.m_Treasure << "\n"
+            << "Nearby Mines: " << DisplayMineCount << "\n"
+            << "Nearby Treasure: " << DisplayTreasureCount << "\n";
 
         text.setString(ss.str());
 
