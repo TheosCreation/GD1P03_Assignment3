@@ -127,12 +127,19 @@ int main()
         }
 */
         // update ui
-        int DisplayMineCount = 0;
-        int DisplayTreasureCount = 0;
-        if (mousePosGrid.x < tileMap.mapSize && mousePosGrid.y < tileMap.mapSize) {
-            DisplayMineCount = tileMap.tileMap[mousePosGrid.x][mousePosGrid.y].m_MineCount;
-            DisplayTreasureCount = tileMap.tileMap[mousePosGrid.x][mousePosGrid.y].m_TresureCount;
+        int DisplayMineCount = -1;
+        int DisplayTreasureCount= -1;
+        if (mousePosGrid.x < tileMap.mapSize && mousePosGrid.y < tileMap.mapSize ) {
+            if(tileMap.tileMap[mousePosGrid.x][mousePosGrid.y].m_Explored){
+                DisplayMineCount = tileMap.tileMap[mousePosGrid.x][mousePosGrid.y].m_MineCount;
+                DisplayTreasureCount = tileMap.tileMap[mousePosGrid.x][mousePosGrid.y].m_TresureCount;
+            }
+            else {
+                DisplayMineCount = -1;
+                DisplayTreasureCount = -1;
+            }
         }
+       
         std::stringstream ss;
         ss << "Screen: " << mousePosScreen.x << " " << mousePosScreen.y << "\n"
             << "Window: " << mousePosWindow.x << " " << mousePosWindow.y << "\n"

@@ -10,22 +10,29 @@ void Tile::ObjInTile(Controler* _ObjHandler)
 			if (Active) {
 				_ObjHandler->Destroy();
 				Active = false;
-				SetSprite("Assets/Sprites/Water.png");
+		/*		SetSprite("Assets/Sprites/Water.png");
+				m_TileType = Type_Water;
+				SetNeighbours();*/
 			}
 			break;
 		case Type_Treasure:
 			if (Active) {
 				_ObjHandler->Treasure(1);
 				Active = false;
-				SetSprite("Assets/Sprites/Water.png");
+			/*	SetSprite("Assets/Sprites/Water.png");
+				m_TileType = Type_Water;
+				SetNeighbours();*/
 			}
 			break;
 		case Type_Water:
 			// Does nothing
+			SetSprite("Assets/Sprites/WaterExplored.png");
 			break;
 		default:
 			break;
 		}
+
+		m_Explored = true;
 	}
 	
 }
@@ -51,5 +58,5 @@ void Tile::SetNeighbours()
 			}
 		}
 	}
-	std::cout << m_MineCount << std::endl;
+
 }

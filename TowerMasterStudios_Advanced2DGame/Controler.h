@@ -3,7 +3,7 @@
 class Controler 
 {
 public:
-	Object *AllyObjArray[20];
+	Object *AllyObjArray[10];
 	Object* m_ObjectSelected;
 	sf::Vector2f m_MovedToTile;
 

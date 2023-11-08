@@ -11,6 +11,7 @@ enum TileType {
 class Tile
 {
 public:
+	bool m_Explored = false;
 	TileType m_TileType = Type_Water;
 	sf::RectangleShape m_Tile; 
 	sf::Vector2i m_Pos = { 0,0 };
