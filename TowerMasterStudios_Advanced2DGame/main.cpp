@@ -53,7 +53,8 @@ int main()
     text.setPosition(20.0f, 20.0f);
 
     //controler
-    ObjHandler.InstObjects();
+    //ObjHandler.InstObjects();
+    ObjHandler.LoadFromFile("Assets/Battles/Battle1.txt");
 
     // window stuff
     sf::Vector2f WindowSize(1920, 1080);
@@ -195,6 +196,11 @@ int main()
         } 
     */
         for (Object* obj : ObjHandler.AllyObjArray)
+        {
+            obj->Update();
+            obj->draw(&window);
+        }
+        for (Object* obj : ObjHandler.EnemyObjArray)
         {
             obj->Update();
             obj->draw(&window);

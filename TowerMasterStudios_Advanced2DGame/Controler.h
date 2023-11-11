@@ -1,9 +1,12 @@
 #pragma once
 #include "Object.h"
+#include <fstream>
+#include <sstream>
 class Controler 
 {
 public:
 	Object *AllyObjArray[10];
+	Object *EnemyObjArray[10];
 	Object* m_ObjectSelected;
 	sf::Vector2f m_MovedToTile;
 
@@ -14,5 +17,6 @@ public:
 	void SelectObj(sf::Vector2u _GridMousePos);
 	void Destroy();
 	void Treasure(int _Treasure);
+	void LoadFromFile(std::string _fileName);
 };
 

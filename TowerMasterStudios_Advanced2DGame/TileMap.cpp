@@ -68,7 +68,7 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
                     }
                 }
             }
-            std::cout << NeighbourCount << std::endl;
+            //std::cout << NeighbourCount << std::endl;
         }
     }
 }
