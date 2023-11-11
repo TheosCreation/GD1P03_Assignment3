@@ -12,7 +12,6 @@ void Controler::InstObjects()
             AllyObjArray[ArrayPos] =NewObject;
             //assign object to this
             ArrayPos++;
-
         }
     }
 }
@@ -60,4 +59,87 @@ void Controler::Destroy()
 void Controler::Treasure(int _Treasure)
 {
     m_Treasure += _Treasure;
+}
+
+void Controler::LoadFromFile(std::string _fileName)
+{
+    std::ifstream ObjFile(_fileName);
+
+    if (!ObjFile) {
+        std::cout << "File not found" << std::endl;
+        return;
+    }
+
+    int x = 0;
+    int y = 0;
+    int ArrayPos = 0;
+    char Type;
+    bool Ally = true;
+    Object* NewObject = nullptr;
+
+    while (ObjFile >> Type) {
+        if (Type == 'a') {
+            std::cerr << "a: " << "\n";
+            continue;
+        }
+        if (Type == 'e') {
+            std::cerr << "e: " << "\n";
+            Ally = false;
+            ArrayPos = 0;
+            continue;
+        }
+
+        ObjFile >> x >> y;
+        if (Ally) {
+            switch (Type)
+            {
+            case 'c':
+
+                std::cerr << "c: " << x << " " << y << "\n";
+
+                NewObject = new Object(Type_AllyPiece, Type_Cruise, sf::Vector2f(x, y), 64.0f);
+                break;
+            case 'j':
+                std::cerr << "j: " << x << " " << y << "\n";
+                NewObject = new Object(Type_AllyPiece, Type_JetSki, sf::Vector2f(x, y), 64.0f);
+                break;
+            case 'p':
+                std::cerr << "p: " << x << " " << y << "\n";
+                NewObject = new Object(Type_AllyPiece, Type_PirateShip, sf::Vector2f(x, y), 64.0f);
+                break;
+            default:
+                std::cerr << "Unknown object type: " << Type << std::endl;
+                continue; // Skip to the next iteration of the loop
+            }
+        
+            std::cerr << ArrayPos << "\n";
+            AllyObjArray[ArrayPos++] = NewObject;
+        }
+        else {
+            switch (Type)
+            {
+            case 'c':
+
+                std::cerr << "c: " << x << " " << y << "\n";
+
+                NewObject = new Object(Type_EnemyPiece, Type_Cruise, sf::Vector2f(x, y), 64.0f);
+                break;
+            case 'j':
+                std::cerr << "j: " << x << " " << y << "\n";
+                NewObject = new Object(Type_EnemyPiece, Type_JetSki, sf::Vector2f(x, y), 64.0f);
+                break;
+            case 'p':
+                std::cerr << "p: " << x << " " << y << "\n";
+                NewObject = new Object(Type_EnemyPiece, Type_PirateShip, sf::Vector2f(x, y), 64.0f);
+                break;
+            default:
+                std::cerr << "Unknown object type: " << Type << std::endl;
+                continue; // Skip to the next iteration of the loop
+            }
+
+            std::cerr << ArrayPos << "\n";
+            EnemyObjArray[ArrayPos++] = NewObject;
+        }
+        
+    }
 }

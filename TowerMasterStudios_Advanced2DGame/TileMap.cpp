@@ -70,6 +70,7 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
                 }
             }
          //   std::cout << NeighbourCount << std::endl;
+            //std::cout << NeighbourCount << std::endl;
         }
     }
 }
@@ -136,4 +137,5 @@ void TileMap::update(sf::View _view, Controler* _ctrl)
     {
         toY = mapSize;
     }   
+    
 }

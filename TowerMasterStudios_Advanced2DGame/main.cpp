@@ -55,6 +55,8 @@ int main()
     text.setPosition(20.0f, 20.0f);
 
     //controler
+    //ObjHandler.InstObjects();
+    ObjHandler.LoadFromFile("Assets/Battles/Battle1.txt");
     ObjHandler.InstObjects();
     EnemyHandler.InstObjects();
 
@@ -203,7 +205,8 @@ int main()
             obj->Update();
             obj->draw(&window);
         }  
-        for (Object* obj : EnemyHandler.EnemyObjArray)
+      
+        for (Object* obj : ObjHandler.EnemyObjArray)
         {
             obj->Update();
             obj->draw(&window);
