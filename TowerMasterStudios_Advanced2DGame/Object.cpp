@@ -11,24 +11,27 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 
 	sf::Color Purple(142, 22, 166);
 	sf::Color Blue(22, 56, 166);
-	sf::Color Green(30, 174, 54);
+	sf::Color Green(79, 174, 54);
+	
 
 	
-	m_ObjShape.setOutlineThickness(5.0f);
-	m_ObjShape.setOutlineColor(sf::Color::Black);
+	
 	m_ObjType = _ObjType;
 	m_UnitType = _UnitType;
 	switch (m_ObjType)
 	{
 	case Type_AllyPiece:
-		m_ObjShape.setFillColor(sf::Color::Green);
+		m_ObjShape.setOutlineThickness(5.0f);
+		m_ObjShape.setOutlineColor(sf::Color::Green);
 		break;
 	case Type_EnemyPiece:
-		m_ObjShape.setFillColor(sf::Color::Red);
+		m_ObjShape.setOutlineThickness(5.0f);
+		m_ObjShape.setOutlineColor(sf::Color::Red);
 		break;
 	default:
 		break;
 	}
+
 	switch (_UnitType)
 	{
 	case Type_Cruise:
@@ -39,11 +42,13 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 	case Type_JetSki:
 		m_MaxMoveDistance = 3;
 		m_ObjShape.setFillColor(Blue);
-		m_Color = Blue;
+		m_Color =  Blue;
+	
 	case Type_PirateShip:
 		m_MaxMoveDistance = 5;
 		m_ObjShape.setFillColor(Green);
 		m_Color = Green;
+		
 		break;
 	default:
 		break;

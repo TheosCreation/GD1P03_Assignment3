@@ -1,5 +1,6 @@
 #include <sstream>
 #include "Controler.h"
+#include "EnemyControler.h"
 #include "TileMap.h"
 
 #include <iostream>
@@ -20,6 +21,7 @@ int main()
     float gridSizeF = 64.0f;
     unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
     Controler ObjHandler;
+    EnemyControler EnemyHandler(ObjHandler);
     // object variables 
   /*  Object EnemyObjArray[20];
     int ArrayPos = 0;
@@ -54,6 +56,7 @@ int main()
 
     //controler
     ObjHandler.InstObjects();
+    EnemyHandler.InstObjects();
 
     // window stuff
     sf::Vector2f WindowSize(1920, 1080);
@@ -159,6 +162,7 @@ int main()
             }
             if (event.type == sf::Event::MouseButtonPressed) {
                 ObjHandler.SelectObj(mousePosGrid);
+                EnemyHandler.MoveTile();
             }
         }
 
@@ -195,6 +199,11 @@ int main()
         } 
     */
         for (Object* obj : ObjHandler.AllyObjArray)
+        {
+            obj->Update();
+            obj->draw(&window);
+        }  
+        for (Object* obj : EnemyHandler.EnemyObjArray)
         {
             obj->Update();
             obj->draw(&window);

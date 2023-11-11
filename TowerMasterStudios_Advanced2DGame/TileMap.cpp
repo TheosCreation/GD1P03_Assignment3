@@ -64,11 +64,12 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
                         {
                             tileMap[x][y].m_Neighbours[NeighbourCount] = &tileMap[newX][newY];
                             NeighbourCount++;
+                            //stole from code in 2d game assignment
                         }
                     }
                 }
             }
-            std::cout << NeighbourCount << std::endl;
+         //   std::cout << NeighbourCount << std::endl;
         }
     }
 }
