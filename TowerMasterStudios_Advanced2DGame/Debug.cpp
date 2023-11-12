@@ -33,6 +33,9 @@ Debug::Debug(sf::Vector2f _UpButtonPos, sf::Vector2f _DownButtonPos, sf::Vector2
     m_TitleText.setCharacterSize(_TextSize);
     m_TitleText.setFillColor(sf::Color::White);
     m_TitleText.setPosition(_TitleTextPos);
+
+
+
 }
 
 Debug::~Debug()

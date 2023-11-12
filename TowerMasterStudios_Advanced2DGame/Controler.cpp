@@ -18,6 +18,9 @@ void Controler::InstObjects()
 
 bool Controler::SelectObj(sf::Vector2u _GridMousePos)
 {
+    for (int i = 0; i < 10; i++) {
+        std::cout << AllyObjArray[i]->m_ObjType << std::endl;
+    }
     m_Moved = false;
     bool ObjectHasBeenSelected = false;
     for (Object* obj : AllyObjArray) {
@@ -151,4 +154,65 @@ void Controler::LoadFromFile(std::string _fileName)
       //  std::cout << EnemyObjArray[i] << std::endl;
     }
     
+}
+
+void Controler::save()
+{
+    std::ofstream SavedObjects("SavedBattle.txt");
+    SavedObjects << "a" << std::endl;
+    char type = ' ';
+    for (int i = 0; i < 10; i++) {
+        
+        switch (AllyObjArray[i]->m_UnitType)
+        {
+        case Type_Cruise:
+            type = 'c';
+            break;
+        case Type_JetSki:
+            type = 'j';
+            break;
+        case Type_PirateShip:
+            type = 'p';
+            break;
+        default:
+            break;
+        }
+
+        SavedObjects << type << " " << AllyObjArray[i]->m_TilePos.x << " " << AllyObjArray[i]->m_TilePos.y << std::endl;
+    }
+    std::ifstream ObjFile("Assets/Battles/Battle1.txt");
+    int x = 0;
+    int y = 0;
+    int ArrayPos = 0;
+    char Type;
+    std::cout << ObjFile.is_open();
+
+    while (ObjFile >> Type) {
+        ObjFile >> x >> y;
+        if (!ObjFile) {
+            std::cout << "File not found" << std::endl;
+            //return;
+
+        }
+
+        switch (Type)
+        {
+        case 'c':
+            SavedObjects << Type << ' ' << x << ' ' << y << std::endl;
+            break;
+        case 'j':
+            SavedObjects << Type << ' ' << x << ' ' << y << std::endl;
+            break;
+        case 'p':
+            SavedObjects << Type << ' ' << x << ' ' << y << std::endl;
+            break;
+        case 'e':
+            SavedObjects << 'e' << std::endl;
+            break;
+        default:
+            std::cerr << "Unknown object type: " << Type << std::endl;
+            continue; // Skip to the next iteration of the loop
+        }
+    
+    }
 }

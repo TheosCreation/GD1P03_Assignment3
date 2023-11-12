@@ -21,7 +21,7 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
            
        
             int Seed = rand() % 100;
-            if (Seed % 5 == 0) {
+            if (Seed % 4 == 0) {
                 tileMap[x][y].m_TileType = TileType(rand() % 2);
             }
             //summons tilemap tiles? i think
@@ -140,4 +140,22 @@ void TileMap::update(sf::View _view, Controler* _ctrl, EnemyControler* _ectrl)
         toY = mapSize;
     }   
     
+}
+
+void TileMap::save(std::string _FileName)
+{
+
+    std::ofstream SavedGame(_FileName+".txt");
+    SavedGame << "L" << std::endl;
+    for (int y = 0; y < mapSize; y++)
+    {
+
+        for (int x = 0; x < mapSize; x++)
+        {
+            SavedGame << " t " << std::to_string(tileMap[x][y].m_TileType) << " " << std::to_string(tileMap[x][y].m_Explored)
+                << " " << std::to_string(tileMap[x][y].Active);
+        }
+        SavedGame << '\n';
+    }
+
 }

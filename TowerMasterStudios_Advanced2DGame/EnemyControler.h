@@ -1,6 +1,8 @@
 #pragma once
 #include "Controler.h"
 #include <vector>
+#include <fstream>
+#include <iostream>
 class EnemyControler
 {
 public:
@@ -18,5 +20,6 @@ public:
 	void MoveTile(bool _Move);
 	void Destroy();
 	void Treasure(int _Treasure);
+	void save();
 };
 

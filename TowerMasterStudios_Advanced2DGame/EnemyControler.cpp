@@ -7,7 +7,8 @@ EnemyControler::EnemyControler(Controler _ControlerRef)
     for (int i = 0; i < 10; i++) {
         m_EnemyObjArray[i] =  m_AllyControlerRef->EnemyObjArray[i];
     }
-    std::cout << "x: " << m_AllyControlerRef->m_Moved << std::endl;
+    
+    
 }
 EnemyControler::~EnemyControler()
 {
@@ -107,4 +108,30 @@ void EnemyControler::Destroy()
 void EnemyControler::Treasure(int _Treasure)
 {
     m_Treasure += _Treasure;
+}
+
+void EnemyControler::save()
+{
+    std::ofstream SavedEnemies("Assets/Enemies.txt");
+    SavedEnemies << "e" << std::endl;
+    char type = ' ';
+    for (int i = 0; i < 10; i++) {
+        switch (m_EnemyObjArray[i]->m_UnitType)
+        {
+        case Type_Cruise:
+            type = 'c';
+            break;
+        case Type_JetSki:
+            type = 'j';
+            break;
+        case Type_PirateShip:
+            type = 'p';
+            break;
+        default:
+            break;
+        }
+    
+        SavedEnemies << type << " " << m_EnemyObjArray[i]->m_TilePos.x << " " << m_EnemyObjArray[i]->m_TilePos.y << std::endl;
+    }
+    
 }
