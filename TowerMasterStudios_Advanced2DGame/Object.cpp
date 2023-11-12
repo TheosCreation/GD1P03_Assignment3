@@ -9,9 +9,15 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 
 	// this switch statement allows us to change the colour based on the object type, which is part of the object constructor, above. 
 
-	sf::Color Purple(142, 22, 166);
-	sf::Color Blue(22, 56, 166);
-	sf::Color Green(79, 174, 54);
+	sf::Color Purple(142, 22, 166, 128);
+	sf::Color Blue(22, 56, 166, 128);
+	sf::Color GreenA(79, 174, 54, 128);
+
+
+	sf::Color Red(255, 0, 0, 128);
+	sf::Color Green(0, 255, 0, 128);
+
+
 	
 
 	
@@ -22,11 +28,11 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 	{
 	case Type_AllyPiece:
 		m_ObjShape.setOutlineThickness(5.0f);
-		m_ObjShape.setOutlineColor(sf::Color::Green);
+		m_ObjShape.setOutlineColor(Green);
 		break;
 	case Type_EnemyPiece:
 		m_ObjShape.setOutlineThickness(5.0f);
-		m_ObjShape.setOutlineColor(sf::Color::Red);
+		m_ObjShape.setOutlineColor(Red);
 		break;
 	default:
 		break;
@@ -46,8 +52,8 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 	
 	case Type_PirateShip:
 		m_MaxMoveDistance = 5;
-		m_ObjShape.setFillColor(Green);
-		m_Color = Green;
+		m_ObjShape.setFillColor(GreenA);
+		m_Color = GreenA;
 		
 		break;
 	default:

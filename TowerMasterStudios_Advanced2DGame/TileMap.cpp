@@ -89,13 +89,14 @@ void TileMap::draw(sf::RenderWindow* _window)
 
 void TileMap::update(sf::View _view, Controler* _ctrl)
 {
+    ShowingMine = ShowingMine < 200 ? ShowingMine + 1 : 0;
     for (int x = 0; x < mapSize; x++)
     {
         for (int y = 0; y < mapSize; y++)
         {
             tileMap[x][y].ObjInTile(_ctrl);
             if (tileMap[x][y].m_Explored) {
-                tileMap[x][y].Update();
+                tileMap[x][y].Update(ShowingMine);
             }
             
         }

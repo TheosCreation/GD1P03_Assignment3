@@ -25,6 +25,6 @@ public:
 	void SetNeighbours();
 	int m_MineCount = 0;
 	int m_TresureCount = 0;
-	void Update();
+	void Update(int _showingMine);
 };
 

@@ -33,7 +33,7 @@ void Tile::ObjInTile(Controler* _ObjHandler)
 			break;
 		}
 
-		m_Explored = true;
+		
 	}
 	
 }
@@ -62,10 +62,10 @@ void Tile::SetNeighbours()
 
 }
 
-void Tile::Update()
+void Tile::Update(int _showingMine)
 {
-	ShowingMine = ShowingMine < 200 ? ShowingMine +1 : 0;
-	if (ShowingMine > 100 && ShowingMine < 200) {
+	
+	if (_showingMine > 100 && _showingMine < 200) {
 		SetSprite((std::string("Assets/Sprites/WaterExploredTreasure").append(std::to_string(m_TresureCount))).append(".png"));
 	}
 	else {

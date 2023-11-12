@@ -11,6 +11,7 @@ class TileMap
 	int toX = 0;
 	int fromY = 0;
 	int toY = 0; 
+	int ShowingMine = 0;
 	sf::Texture* BombTexture;
 
 public:
