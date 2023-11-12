@@ -69,8 +69,6 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
                     }
                 }
             }
-         //   std::cout << NeighbourCount << std::endl;
-            //std::cout << NeighbourCount << std::endl;
         }
     }
 }
@@ -81,7 +79,6 @@ void TileMap::draw(sf::RenderWindow* _window)
     {
         for (int y = fromY; y < toY; y++)
         {
-            //_window->draw(tileMap[x][y].m_Tile);
             _window->draw(tileMap[x][y].m_TileSprite);
         }
     }

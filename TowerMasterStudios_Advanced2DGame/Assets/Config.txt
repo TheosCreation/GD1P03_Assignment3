@@ -1,0 +1,8 @@
+# _VSync
+1
+# _Debug
+1
+# WindowSize.x
+1920
+# WindowSize.y
+1080

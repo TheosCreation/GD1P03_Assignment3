@@ -49,12 +49,11 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 		m_MaxMoveDistance = 2;
 		m_ObjShape.setFillColor(Blue);
 		m_Color =  Blue;
-	
+		break;
 	case Type_PirateShip:
 		m_MaxMoveDistance = 3;
 		m_ObjShape.setFillColor(GreenA);
 		m_Color = GreenA;
-		
 		break;
 	default:
 		break;

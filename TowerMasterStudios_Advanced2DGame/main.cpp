@@ -2,6 +2,8 @@
 #include "Controler.h"
 #include "EnemyControler.h"
 #include "TileMap.h"
+#include "Debug.h"
+#include "FileManager.h"
 
 #include <iostream>
 // ALWAYS BUILD IN RELEASE, AT LEAST ONCE A DAY. 
@@ -11,8 +13,17 @@ walk around, find tresure using mindsweeper strats and avoid mines
 its a vs game a competition
 \ai just moves randomly (haha they are stupid)
 */
+
 int main()
 {
+    // Loaded Variables
+    bool _VSync = false;
+    bool _Debug = false;
+    sf::Vector2f WindowSize(1700, 1080);
+
+    FileManager fileManager;
+    fileManager.LoadValuesFromFile("Assets/Config.txt", _VSync, _Debug, WindowSize);
+
     // game variables
     float _dt = 0.0f;
     sf::Clock dtClock;
@@ -21,60 +32,54 @@ int main()
     float gridSizeF = 64.0f;
     unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
     Controler ObjHandler;
-    
-    // object variables 
-  /*  Object EnemyObjArray[20];
-    int ArrayPos = 0;
-    for (int i = 1; i < 3; i++)
-    {
-        for (int j = 1; j < 11; j++)
-        {
-            
-         
-            EnemyObjArray[ArrayPos].initObject(Type_EnemyPiece, sf::Vector2f(j, i), 100.0f);
-            ArrayPos++;
-           
-        }
-    }*/
+
     bool testvar = true;
-  
-    // mouse variables
+
+    // Window Creation
+    sf::RenderWindow Window(sf::VideoMode(WindowSize.x, WindowSize.y), "Pirate Minesweeper");
+    Window.setVerticalSyncEnabled(_VSync);
+    Window.setFramerateLimit(60);
+
+    // Viewport Creation
+    float viewSpeed = 300.0f;
+    sf::View view;
+    view.setSize(WindowSize);
+
+    // Mouse variables
     sf::Vector2i mousePosScreen;
     sf::Vector2i mousePosWindow;    
     sf::Vector2f mousePosView;
     sf::Vector2u mousePosGrid;
 
-    // ui variables
+    // Font Creation
     sf::Font font;
     font.loadFromFile("Assets/Fonts/HWYGOTH.TTF");
 
-    sf::Text text;
-    text.setCharacterSize(16);
-    text.setFillColor(sf::Color::Green);
-    text.setFont(font);
-    text.setPosition(20.0f, 20.0f);
+    // Debug
+    sf::Text DebugText;
+    DebugText.setCharacterSize(16);
+    DebugText.setFillColor(sf::Color::Green);
+    DebugText.setFont(font);
+    DebugText.setPosition(20.0f, 20.0f);
 
-    //controler
-    //ObjHandler.InstObjects();
+
+    //Debug Window
+    sf::RenderWindow DebugWindow(sf::VideoMode(WindowSize.x/4, WindowSize.y/4), "Debug Window");
+    DebugWindow.setPosition(sf::Vector2i(Window.getPosition().x - (400 + 50), Window.getPosition().y));
+    DebugWindow.setFramerateLimit(60);
+    DebugWindow.setVisible(_Debug);
+
+    // Debuging Entry for Gravity
+    Debug g_ViewSpeed(sf::Vector2f(320, 10), sf::Vector2f(360, 10), sf::Vector2f(20, 20), font, sf::Vector2f(10, 10),
+        sf::Vector2f(325, 10), sf::Vector2f(365, 10), 15);
+    g_ViewSpeed.m_TitleText.setString("ViewSpeed");
+    g_ViewSpeed.m_ButtonUpText.setString("+");
+    g_ViewSpeed.m_ButtonDownText.setString("-");
+
+    // controler
     ObjHandler.LoadFromFile("Assets/Battles/Battle3.txt");
-    ObjHandler.InstObjects();
     EnemyControler EnemyHandler(ObjHandler);
     EnemyHandler.InstObjects();
-
-    // window stuff
-    sf::Vector2f WindowSize(1920, 1080);
-
-    sf::RenderWindow window(sf::VideoMode(WindowSize.x, WindowSize.y), "Pirate Minesweeper");
-    window.setFramerateLimit(60);
-
-    // viewport stff
-    sf::View view;
-    view.setSize(WindowSize);
-    
-    //view.setCenter(window.getSize().x/2.0f, window.getSize().y / 2.0f);
-    float viewSpeed = 300.0f;
-
-    // game objects
 
     // tilemap
     int mapsize = 20;
@@ -82,7 +87,7 @@ int main()
 
     int tilemapcenter = (mapsize * gridSizeF) / 2 - 1;
 
-    //set the initial start position of the view
+    //sets the initial start position of the view
     view.setCenter(tilemapcenter, tilemapcenter);
 
     // tile selector
@@ -90,7 +95,6 @@ int main()
     tileSelector.setFillColor(sf::Color::Transparent);
     tileSelector.setOutlineThickness(1.0f);
     tileSelector.setOutlineColor(sf::Color::Green);
-    int a = 0;
 
     for (int x = 0; x < tileMap.mapSize; x++)
     {
@@ -101,7 +105,7 @@ int main()
         }
 
     }
-    while (window.isOpen())
+    while (Window.isOpen())
     {
         // update dt
         _dt = dtClock.restart().asSeconds();
@@ -109,9 +113,9 @@ int main()
 
         // update mouse positions
         mousePosScreen = sf::Mouse::getPosition();
-        mousePosWindow = sf::Mouse::getPosition(window);
-        window.setView(view);
-        mousePosView = window.mapPixelToCoords(mousePosWindow);
+        mousePosWindow = sf::Mouse::getPosition(Window);
+        Window.setView(view);
+        mousePosView = Window.mapPixelToCoords(mousePosWindow);
         if(mousePosView.x >= 0.0f){
             mousePosGrid.x = mousePosView.x / gridSizeU;
         }
@@ -120,18 +124,7 @@ int main()
         }
         // update game
         tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
-    /*
-        if(testvar){
-        for (int i = 0; i < 8; i++)
-        {
 
-            if(tileMap.tileMap[12][6].m_Neighbours[i]!=NULL){
-            std::cout << tileMap.tileMap[2][2].m_Neighbours << std::endl;
-            }
-        }
-        testvar = false;
-        }
-*/
         // update ui
         int DisplayMineCount = -1;
         int DisplayTreasureCount= -1;
@@ -155,18 +148,41 @@ int main()
             << "Nearby Mines: " << DisplayMineCount << "\n"
             << "Nearby Treasure: " << DisplayTreasureCount << "\n";
 
-        text.setString(ss.str());
+        DebugText.setString(ss.str());
 
         sf::Event event;
-        while (window.pollEvent(event))
+        while (Window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed) {
-                window.close();
+                Window.close();
             }
             if (event.type == sf::Event::MouseButtonPressed) {
                 
                 
                 EnemyHandler.MoveTile(ObjHandler.SelectObj(mousePosGrid));
+            }
+            sf::Event DebugEvent;
+            while (DebugWindow.pollEvent(DebugEvent))
+            {
+                // Exit and close the Debug window
+                if (DebugEvent.type == sf::Event::Closed)
+                {
+                    DebugWindow.setVisible(false);
+                }
+                // Checks mouse pressed
+                if (DebugEvent.type == sf::Event::MouseButtonPressed)
+                {
+                    // View Speed Increase
+                    if (g_ViewSpeed.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                    {
+                        viewSpeed += 100.0f;
+                    }
+                    // View Speed decrease
+                    if (g_ViewSpeed.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                    {
+                        viewSpeed -= 100.0f;
+                    }
+                }
             }
         }
 
@@ -189,38 +205,39 @@ int main()
         tileMap.update(view, &ObjHandler, &EnemyHandler);
 
         // draw
-        window.clear();
-        window.setView(view);
+        Window.clear();
+        Window.setView(view);
 
         // draw game
-        tileMap.draw(&window);
- 
-     /*   for (Object obj : EnemyObjArray)
-        {
-            
-          
-            obj.draw(&window);
-        } 
-    */
+        tileMap.draw(&Window);
+
+        // update and draw objects
         for (Object* obj : ObjHandler.AllyObjArray)
         {
             obj->Update();
-            obj->draw(&window);
+            obj->draw(&Window);
         }  
       
         for (Object* obj : ObjHandler.EnemyObjArray)
         {
             obj->Update();
-            obj->draw(&window);
+            obj->draw(&Window);
         }
-        window.draw(tileSelector);
+        Window.draw(tileSelector);
 
-        window.setView(window.getDefaultView());
+        Window.setView(Window.getDefaultView());
 
-        // draw ui
-        window.draw(text);
+        // draw debug
+        Window.draw(DebugText);
 
-        window.display();
+        Window.display();
+        
+        // if debug is true in file update and draw to debug window
+        if (_Debug) {
+            DebugWindow.clear();
+            g_ViewSpeed.Draw(&DebugWindow);
+            DebugWindow.display();
+        }
     }
 
     return 0;
