@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Controler.h"
+#include "EnemyControler.h"
 
 enum TileType {
 	Type_Mine,
@@ -20,7 +21,7 @@ public:
 	Tile *m_Neighbours[8];
 	unsigned int ShowingMine = 0;
 	bool Active = true;
-	void ObjInTile(Controler* _ObjHandler);
+	void ObjInTile(Controler* _ObjHandler, EnemyControler* _EnemyHandler);
 	void SetSprite(sf::String _Path);
 	void SetNeighbours();
 	int m_MineCount = 0;

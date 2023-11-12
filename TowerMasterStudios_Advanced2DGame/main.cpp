@@ -56,7 +56,7 @@ int main()
 
     //controler
     //ObjHandler.InstObjects();
-    ObjHandler.LoadFromFile("Assets/Battles/Battle1.txt");
+    ObjHandler.LoadFromFile("Assets/Battles/Battle3.txt");
     ObjHandler.InstObjects();
     EnemyControler EnemyHandler(ObjHandler);
     EnemyHandler.InstObjects();
@@ -186,7 +186,7 @@ int main()
         }
 
         // tilemap update
-        tileMap.update(view, &ObjHandler);
+        tileMap.update(view, &ObjHandler, &EnemyHandler);
 
         // draw
         window.clear();

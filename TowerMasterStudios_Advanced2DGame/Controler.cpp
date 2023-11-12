@@ -2,7 +2,7 @@
 
 void Controler::InstObjects()
 {
-    int ArrayPos = 0;
+   /* int ArrayPos = 0;
     for (int i = 1; i < 2; i++)
     {
         for (int j = 1; j < 11; j++)
@@ -13,7 +13,7 @@ void Controler::InstObjects()
             //assign object to this
             ArrayPos++;
         }
-    }
+    }*/
 }
 
 bool Controler::SelectObj(sf::Vector2u _GridMousePos)

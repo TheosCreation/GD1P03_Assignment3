@@ -44,7 +44,8 @@ void EnemyControler::MoveTile(bool _Move)
         
         int random = rand() % ArraySize;
         int maxMove = m_EnemyObjArray[random]->m_MaxMoveDistance;
-        maxMove = 1;
+        m_MovedObj = m_EnemyObjArray[random];
+     //   maxMove = 1;
         bool ableToSet = false;
        // std::cout << rand() % maxMove << std::endl;
 
@@ -59,12 +60,13 @@ void EnemyControler::MoveTile(bool _Move)
              newPosX = (rand() % (maxMove * 2) - maxMove) * 64
             + m_EnemyObjArray[random]->m_Pos.x;
             }
-            while (std::find(oldPosX.begin(), oldPosX.end(), newPosX) != oldPosX.end());
+            while (std::find(oldPosX.begin(), oldPosX.end(), newPosX) != oldPosX.end()||int(newPosX/64)>20 || int(newPosX / 64) < 0);
             do {
                 newPosY = (rand() % (maxMove * 2) - maxMove) * 64
                     + m_EnemyObjArray[random]->m_Pos.y;
-
-            } while (std::find(oldPosY.begin(), oldPosY.end(), newPosY) != oldPosY.end());
+                
+            }
+            while (std::find(oldPosY.begin(), oldPosY.end(), newPosY) != oldPosY.end()||int(newPosY/64)>20 || int(newPosY / 64) < 0);
 
    
             for (int i = 0; i < 10; i++)
@@ -82,7 +84,8 @@ void EnemyControler::MoveTile(bool _Move)
             }
 
         }
-            
+        m_MovedToTile = sf::Vector2f(int(newPosX/64) , int(newPosY/64));
+      
         for (int i = 0; i < 10; i++) {
          /*   std::cout << i << std::endl;
             std::cout <<"X: " << m_EnemyObjArray[i]->m_ObjShape.getPosition().x << std::endl;
@@ -90,4 +93,17 @@ void EnemyControler::MoveTile(bool _Move)
             */
         }
     }
+}
+void EnemyControler::Destroy()
+{
+    if (m_MovedObj != nullptr) {
+        m_MovedObj->m_TilePos.x = -1;
+        m_MovedObj->m_TilePos.y = -1;
+        m_MovedObj->m_ObjShape.setPosition(-1, -1);
+        m_MovedObj->m_ObjShape.setSize(sf::Vector2f(0, 0));
+    }
+}
+void EnemyControler::Treasure(int _Treasure)
+{
+    m_Treasure += _Treasure;
 }

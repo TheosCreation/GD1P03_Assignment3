@@ -46,12 +46,12 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 		m_Color = Purple;
 		break;
 	case Type_JetSki:
-		m_MaxMoveDistance = 3;
+		m_MaxMoveDistance = 2;
 		m_ObjShape.setFillColor(Blue);
 		m_Color =  Blue;
 	
 	case Type_PirateShip:
-		m_MaxMoveDistance = 5;
+		m_MaxMoveDistance = 3;
 		m_ObjShape.setFillColor(GreenA);
 		m_Color = GreenA;
 		

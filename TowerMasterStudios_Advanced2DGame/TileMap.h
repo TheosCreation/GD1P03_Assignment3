@@ -19,6 +19,6 @@ public:
 	int mapSize = 0;
 	TileMap(int _mapSize, float _gridSizeF);
 	void draw(sf::RenderWindow* _window);
-	void update(sf::View _view, Controler* _ctrl);
+	void update(sf::View _view, Controler* _ctrl, EnemyControler* _ectrl);
 };
 
