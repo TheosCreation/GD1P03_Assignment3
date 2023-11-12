@@ -21,7 +21,7 @@ int main()
     float gridSizeF = 64.0f;
     unsigned gridSizeU = static_cast<unsigned>(gridSizeF);
     Controler ObjHandler;
-    EnemyControler EnemyHandler(ObjHandler);
+    
     // object variables 
   /*  Object EnemyObjArray[20];
     int ArrayPos = 0;
@@ -58,6 +58,7 @@ int main()
     //ObjHandler.InstObjects();
     ObjHandler.LoadFromFile("Assets/Battles/Battle1.txt");
     ObjHandler.InstObjects();
+    EnemyControler EnemyHandler(ObjHandler);
     EnemyHandler.InstObjects();
 
     // window stuff
@@ -163,8 +164,9 @@ int main()
                 window.close();
             }
             if (event.type == sf::Event::MouseButtonPressed) {
-                ObjHandler.SelectObj(mousePosGrid);
-                EnemyHandler.MoveTile();
+                
+                
+                EnemyHandler.MoveTile(ObjHandler.SelectObj(mousePosGrid));
             }
         }
 

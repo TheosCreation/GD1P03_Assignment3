@@ -16,8 +16,9 @@ void Controler::InstObjects()
     }
 }
 
-void Controler::SelectObj(sf::Vector2u _GridMousePos)
+bool Controler::SelectObj(sf::Vector2u _GridMousePos)
 {
+    m_Moved = false;
     bool ObjectHasBeenSelected = false;
     for (Object* obj : AllyObjArray) {
         if (_GridMousePos == sf::Vector2u(obj->m_TilePos.x, obj->m_TilePos.y)) {
@@ -39,22 +40,25 @@ void Controler::SelectObj(sf::Vector2u _GridMousePos)
             m_ObjectSelected->m_ObjShape.setPosition(m_ObjectSelected->m_TilePos.x * 64 + 19.2, m_ObjectSelected->m_TilePos.y * 64 + 19.2);
             m_HasSelected = false;
             m_MovedToTile = sf::Vector2f(_GridMousePos.x, _GridMousePos.y);
-        
+            m_Moved = true;
             
         }
         else {
             m_HasSelected = false;
         }
     }
+    return m_Moved;
     
 }
 
 void Controler::Destroy()
 {
-    m_ObjectSelected->m_TilePos.x = -1;
-    m_ObjectSelected->m_TilePos.y = -1;
-    m_ObjectSelected->m_ObjShape.setPosition(-1,-1);
-    m_ObjectSelected->m_ObjShape.setSize(sf::Vector2f(0,0));
+    if(m_ObjectSelected!= nullptr){
+     m_ObjectSelected->m_TilePos.x = -1;
+     m_ObjectSelected->m_TilePos.y = -1;
+     m_ObjectSelected->m_ObjShape.setPosition(-1,-1);
+     m_ObjectSelected->m_ObjShape.setSize(sf::Vector2f(0,0));
+    }
 }
 void Controler::Treasure(int _Treasure)
 {
@@ -142,4 +146,9 @@ void Controler::LoadFromFile(std::string _fileName)
         }
         
     }
+    for (int i = 0; i < 10; i++)
+    {
+      //  std::cout << EnemyObjArray[i] << std::endl;
+    }
+    
 }
