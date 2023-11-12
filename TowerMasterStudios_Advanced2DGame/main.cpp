@@ -1,11 +1,11 @@
-#include <sstream>
 #include "Controler.h"
 #include "EnemyControler.h"
 #include "TileMap.h"
 #include "Debug.h"
 #include "FileManager.h"
-
+#include <SFML/Audio.hpp>
 #include <iostream>
+
 // ALWAYS BUILD IN RELEASE, AT LEAST ONCE A DAY. 
 /*
 minesweeper pirate game
@@ -45,6 +45,15 @@ int main()
     float viewSpeed = 300.0f;
     sf::View view;
     view.setSize(WindowSize);
+
+    // Music Creation
+    sf::Music music;
+
+    // Change some parameters
+    music.openFromFile("Assets/Sounds/Music.ogg");
+    music.setVolume(Volume);
+    music.setLoop(true);
+    music.play();
 
     // Mouse variables
     sf::Vector2i mousePosScreen;
@@ -110,7 +119,8 @@ int main()
     {
         // update dt
         _dt = dtClock.restart().asSeconds();
-
+        //play music
+        
 
         // update mouse positions
         mousePosScreen = sf::Mouse::getPosition();
