@@ -10,6 +10,6 @@ public:
 	FileManager();
 	~FileManager();
 
-	void LoadValuesFromFile(const std::string& _filename, bool& _VSync, bool& _Debug, sf::Vector2f& WindowSize);
+	void LoadValuesFromFile(const std::string& _filename, bool& _VSync, bool& _Debug, sf::Vector2f& WindowSize, int& _Volume);
 };
 

@@ -8,7 +8,7 @@ FileManager::~FileManager()
 {
 }
 
-void FileManager::LoadValuesFromFile(const std::string& _filename, bool& _VSync, bool& _Debug, sf::Vector2f& WindowSize)
+void FileManager::LoadValuesFromFile(const std::string& _filename, bool& _VSync, bool& _Debug, sf::Vector2f& WindowSize, int& _Volume)
 {
     std::ifstream file(_filename);
 
@@ -35,6 +35,8 @@ void FileManager::LoadValuesFromFile(const std::string& _filename, bool& _VSync,
             WindowSize.x = stoi(key);
         case 4:
             WindowSize.y = stoi(key);
+        case 5:
+            _Volume = stoi(key);
         }
         Count++;
     }

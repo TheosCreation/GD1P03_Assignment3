@@ -19,10 +19,11 @@ int main()
     // Loaded Variables
     bool _VSync = false;
     bool _Debug = false;
+    int Volume = false;
     sf::Vector2f WindowSize(1700, 1080);
 
     FileManager fileManager;
-    fileManager.LoadValuesFromFile("Assets/Config.txt", _VSync, _Debug, WindowSize);
+    fileManager.LoadValuesFromFile("Assets/Config.txt", _VSync, _Debug, WindowSize, Volume);
 
     // game variables
     float _dt = 0.0f;
