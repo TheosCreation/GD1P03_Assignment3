@@ -162,31 +162,40 @@ int main()
                 
                 EnemyHandler.MoveTile(ObjHandler.SelectObj(mousePosGrid));
             }
-            sf::Event DebugEvent;
-            while (DebugWindow.pollEvent(DebugEvent))
+            
+        }
+        sf::Event DebugEvent;
+        while (DebugWindow.pollEvent(DebugEvent))
+        {
+            // Exit and close the Debug window
+            if (DebugEvent.type == sf::Event::Closed)
             {
-                // Exit and close the Debug window
-                if (DebugEvent.type == sf::Event::Closed)
+                DebugWindow.setVisible(false);
+            }
+            // Checks mouse pressed
+            if (DebugEvent.type == sf::Event::MouseButtonPressed)
+            {
+
+                // View Speed Increase
+                if (g_ViewSpeed.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
                 {
-                    DebugWindow.setVisible(false);
+                    viewSpeed += 100.0f;
+                    g_ViewSpeed.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                   
                 }
-                // Checks mouse pressed
-                if (DebugEvent.type == sf::Event::MouseButtonPressed)
+                // View Speed decrease
+                if (g_ViewSpeed.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
                 {
-                    // View Speed Increase
-                    if (g_ViewSpeed.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
-                    {
-                        viewSpeed += 100.0f;
-                    }
-                    // View Speed decrease
-                    if (g_ViewSpeed.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
-                    {
-                        viewSpeed -= 100.0f;
-                    }
+                    viewSpeed -= 100.0f;
+                    g_ViewSpeed.m_ButtonDownVisual.setFillColor(sf::Color::Green);
                 }
             }
+            if (DebugEvent.type == sf::Event::MouseButtonReleased) {
+                g_ViewSpeed.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                g_ViewSpeed.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+            }
         }
-
+       
         //Update
         
 

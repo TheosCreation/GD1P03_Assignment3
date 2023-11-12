@@ -38,9 +38,10 @@ void EnemyControler::InstObjects()
 
 void EnemyControler::MoveTile(bool _Move)
 {
-   
+  
     
-    if (m_AllyControlerRef->m_HasSelected&& m_AllyControlerRef->m_Moved  && _Move) {
+    if ( _Move) {
+        
         
         int random = rand() % ArraySize;
         int maxMove = m_EnemyObjArray[random]->m_MaxMoveDistance;
@@ -66,7 +67,7 @@ void EnemyControler::MoveTile(bool _Move)
                     + m_EnemyObjArray[random]->m_Pos.y;
                 
             }
-            while (std::find(oldPosY.begin(), oldPosY.end(), newPosY) != oldPosY.end()||int(newPosY/64)>20 || int(newPosY / 64) < 0);
+            while (std::find(oldPosY.begin(), oldPosY.end(), newPosY) != oldPosY.end()||int(newPosY/64)>19 || int(newPosY / 64) < 1);
 
    
             for (int i = 0; i < 10; i++)
