@@ -94,6 +94,10 @@ void TileMap::update(sf::View _view, Controler* _ctrl)
         for (int y = 0; y < mapSize; y++)
         {
             tileMap[x][y].ObjInTile(_ctrl);
+            if (tileMap[x][y].m_Explored) {
+                tileMap[x][y].Update();
+            }
+            
         }
     }
     

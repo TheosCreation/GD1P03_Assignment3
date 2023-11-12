@@ -18,11 +18,13 @@ public:
 	sf::Texture m_TileTexture;
 	sf::Sprite m_TileSprite;
 	Tile *m_Neighbours[8];
+	unsigned int ShowingMine = 0;
 	bool Active = true;
 	void ObjInTile(Controler* _ObjHandler);
 	void SetSprite(sf::String _Path);
 	void SetNeighbours();
 	int m_MineCount = 0;
 	int m_TresureCount = 0;
+	void Update();
 };
 
