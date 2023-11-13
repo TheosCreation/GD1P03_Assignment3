@@ -42,22 +42,20 @@ void Tile::ObjInTile(Controler* _ObjHandler, EnemyControler* _EnemyHandler)
 			if (Active) {
 				_EnemyHandler->Destroy();
 				Active = false;
-		/*		SetSprite("Assets/Sprites/Water.png");
-				m_TileType = Type_Water;
-				SetNeighbours();*/
+				SetSprite("Assets/Sprites/Bomb.png");
+				//m_TileType = Type_Water;
+				SetNeighbours();
 			}
 			break;
 		case Type_Treasure:
 			if (Active) {
 				_EnemyHandler->Treasure(1);
 				Active = false;
-			/*	SetSprite("Assets/Sprites/Water.png");
-				m_TileType = Type_Water;
-				SetNeighbours();*/
+				SetSprite("Assets/Sprites/Treasure.png");
+				SetNeighbours();
 			}
 			break;
 		case Type_Water:
-
 			m_Explored = true;
 			SetSprite((  std::string("Assets/Sprites/WaterExplored").append(std::to_string(m_MineCount))  ).append(".png"));
 			break;

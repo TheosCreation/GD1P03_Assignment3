@@ -71,6 +71,13 @@ int main()
     DebugText.setFillColor(sf::Color::Green);
     DebugText.setFont(font);
     DebugText.setPosition(20.0f, 20.0f);
+    
+    // Ui For Treasure
+    sf::Text Ui;
+    Ui.setCharacterSize(64);
+    Ui.setFillColor(sf::Color::Green);
+    Ui.setFont(font);
+    Ui.setPosition(100.0f, 20.0f);
 
 
     //Debug Window
@@ -172,6 +179,11 @@ int main()
             }
         }
        
+        std::stringstream Treasure;
+        Treasure << "Treasure: " << ObjHandler.m_Treasure << "\n"
+            << "Enemy Treasure: " << EnemyHandler.m_Treasure << "\n";
+        Ui.setString(Treasure.str());
+
         std::stringstream ss;
         if (_Debug) {
             ss << "Screen: " << mousePosScreen.x << " " << mousePosScreen.y << "\n"
@@ -362,6 +374,9 @@ int main()
 
         // draw debug
         Window.draw(DebugText);
+
+        //draw Ui
+        Window.draw(Ui);
 
         Window.display();
         
