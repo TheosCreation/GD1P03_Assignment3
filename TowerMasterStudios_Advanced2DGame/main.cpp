@@ -233,6 +233,7 @@ int main()
                 if (g_Save.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
                 {
                     //delete &ObjHandler;
+                    tileMap.load("Assets/Saved/SavedGame.txt");
                     ObjHandler = Controler();
                     ObjHandler.LoadFromFile("Assets/Saved/SavedBattle.txt");
                     EnemyHandler.InstObjects(ObjHandler);

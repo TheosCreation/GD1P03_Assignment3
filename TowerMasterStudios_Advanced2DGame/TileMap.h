@@ -24,5 +24,6 @@ public:
 	void draw(sf::RenderWindow* _window);
 	void update(sf::View _view, Controler* _ctrl, EnemyControler* _ectrl);
 	void save(std::string _FileName);
+	void load(std::string _FileName);
 };
 
