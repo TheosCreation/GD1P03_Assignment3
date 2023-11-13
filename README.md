@@ -16,3 +16,4 @@
 - the enemy ai will also move and reveal squares
 - win by getting more treasure than the ai or if they lose by getting all their ships killed
 - you also lose by getting your ships killed 
+- you may save and load files whenever you like
