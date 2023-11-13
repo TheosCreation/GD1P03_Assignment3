@@ -185,6 +185,10 @@ int main()
                 
                 EnemyHandler.MoveTile(ObjHandler.SelectObj(mousePosGrid));
             }
+            if (_Debug && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Tilde)
+            {
+                DebugWindow.setVisible(true);
+            }
             
         }
         sf::Event DebugEvent;
@@ -280,7 +284,7 @@ int main()
         tileMap.update(view, &ObjHandler, &EnemyHandler);
 
         // draw
-        Window.clear();
+        //Window.clear();
         Window.setView(view);
 
         // draw game
