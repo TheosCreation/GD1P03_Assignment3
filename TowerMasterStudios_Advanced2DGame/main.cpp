@@ -44,7 +44,7 @@ int main()
     // Viewport Creation
     float viewSpeed = 300.0f;
     sf::View view;
-    view.setSize(WindowSize);
+    view.setSize(sf::Vector2f(WindowSize.x/1.6, WindowSize.y/1.6));
 
     // Music Creation
     sf::Music music;
@@ -267,18 +267,39 @@ int main()
        
         //Update
         
+        
 
         //Update Input
-       if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-            view.move(-viewSpeed * _dt, 0.0f);
-        }else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-            view.move(viewSpeed * _dt, 0.0f);
+        sf::Vector2f topLeft = Window.mapPixelToCoords(sf::Vector2i(0, 0));
+        sf::Vector2f bottomRight = topLeft + view.getSize();
+        int MoveAmount = 1;
+        if (topLeft.x < 0) {
+            view.move(MoveAmount, 0);
         }
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
-            view.move(0.0f, -viewSpeed * _dt);
-        }else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
-            view.move(0.0f, viewSpeed * _dt);
+        else if (topLeft.y < 0) {
+            view.move(0, MoveAmount);
         }
+        else if (bottomRight.x > 1280) {
+            view.move(-MoveAmount, 0);
+        }
+        else if (bottomRight.y > 1280) {
+            view.move(0, -MoveAmount);
+        }
+        else {
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+                view.move(-viewSpeed * _dt, 0.0f);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+                view.move(viewSpeed * _dt, 0.0f);
+            }
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::W)) {
+                view.move(0.0f, -viewSpeed * _dt);
+            }
+            else if (sf::Keyboard::isKeyPressed(sf::Keyboard::S)) {
+                view.move(0.0f, viewSpeed * _dt);
+            }
+        }
+       
 
         // tilemap update
         tileMap.update(view, &ObjHandler, &EnemyHandler);
