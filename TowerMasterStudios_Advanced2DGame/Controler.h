@@ -10,7 +10,7 @@ public:
 	Object *AllyObjArray[10];
 	Object *EnemyObjArray[10];
 	Object* m_ObjectSelected = nullptr;
-	sf::Vector2f m_MovedToTile;
+	sf::Vector2f m_MovedToTile = sf::Vector2f(-1, -1);
 	bool m_Moved = false;
 	int m_Treasure = 0;
 	bool m_HasSelected = false;

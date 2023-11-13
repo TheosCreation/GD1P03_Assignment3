@@ -8,20 +8,20 @@ void Tile::ObjInTile(Controler* _ObjHandler, EnemyControler* _EnemyHandler)
 		{
 		case Type_Mine:
 			if (Active) {
-				_ObjHandler->Destroy();
 				Active = false;
-		/*		SetSprite("Assets/Sprites/Water.png");
-				m_TileType = Type_Water;
-				SetNeighbours();*/
+				SetSprite("Assets/Sprites/Bomb.png");
+				//m_TileType = Type_Water;
+				SetNeighbours();
+				_ObjHandler->Destroy();
 			}
 			break;
 		case Type_Treasure:
 			if (Active) {
 				_ObjHandler->Treasure(1);
 				Active = false;
-			/*	SetSprite("Assets/Sprites/Water.png");
-				m_TileType = Type_Water;
-				SetNeighbours();*/
+				SetSprite("Assets/Sprites/Treasure.png");
+				//m_TileType = Type_Water;
+				SetNeighbours();
 			}
 			break;
 		case Type_Water:

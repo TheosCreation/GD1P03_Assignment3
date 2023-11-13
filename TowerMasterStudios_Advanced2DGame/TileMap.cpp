@@ -25,24 +25,26 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
                 tileMap[x][y].m_TileType = TileType(rand() % 2);
             }
             //summons tilemap tiles? i think
- 
-            switch (tileMap[x][y].m_TileType)
-            {
-                //defines property of tiles 
-            case Type_Water:
-                tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
-                break;
-            case Type_Mine:
-                tileMap[x][y].SetSprite("Assets/Sprites/Bomb.png");
-                break;
-            case Type_Treasure:
-                tileMap[x][y].SetSprite("Assets/Sprites/Treasure.png");
-                break;
-            default:
-                break;
+            if (x == 1 && y == 1) {
+                tileMap[x][y].m_TileType = Type_Mine;
             }
-         
-            
+
+            tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
+            //switch (tileMap[x][y].m_TileType)
+            //{
+            ////defines property of tiles 
+            //case Type_Water:
+            //    tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
+            //    break;
+            //case Type_Mine:
+            //    tileMap[x][y].SetSprite("Assets/Sprites/Bomb.png");
+            //    break;
+            //case Type_Treasure:
+            //    tileMap[x][y].SetSprite("Assets/Sprites/Treasure.png");
+            //    break;
+            //default:
+            //    break;
+            //}
         }
     }
     for (int x = 0; x < mapSize; x++)

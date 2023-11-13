@@ -98,6 +98,12 @@ int main()
     g_VSync.m_ButtonUpText.setString("Enable");
     g_VSync.m_ButtonDownText.setString("Disable");
 
+    Debug g_Volume(sf::Vector2f(320, 110), sf::Vector2f(360, 110), sf::Vector2f(20, 20), font, sf::Vector2f(10, 110),
+        sf::Vector2f(325, 110), sf::Vector2f(365, 110), 15);
+    g_Volume.m_TitleText.setString("Volume");
+    g_Volume.m_ButtonUpText.setString("+");
+    g_Volume.m_ButtonDownText.setString("-");
+
     // controler
     ObjHandler.LoadFromFile("Assets/Battles/Battle3.txt");
     EnemyControler EnemyHandler;
@@ -130,15 +136,18 @@ int main()
     
     while (Window.isOpen())
     {
+        
         // update dt
         _dt = dtClock.restart().asSeconds();
-        //play music
         
+        // update volume
+        music.setVolume(Volume);
 
         // update mouse positions
+        Window.setView(view);
         mousePosScreen = sf::Mouse::getPosition();
         mousePosWindow = sf::Mouse::getPosition(Window);
-        Window.setView(view);
+        
         mousePosView = Window.mapPixelToCoords(mousePosWindow);
         if(mousePosView.x >= 0.0f){
             mousePosGrid.x = mousePosView.x / gridSizeU;
@@ -164,14 +173,16 @@ int main()
         }
        
         std::stringstream ss;
-        ss << "Screen: " << mousePosScreen.x << " " << mousePosScreen.y << "\n"
-            << "Window: " << mousePosWindow.x << " " << mousePosWindow.y << "\n"
-            << "View: " << mousePosView.x << " " << mousePosView.y << "\n"
-            << "Grid: " << mousePosGrid.x << " " << mousePosGrid.y << "\n"
-            << "Treasure: " << ObjHandler.m_Treasure << "\n"
-            << "Nearby Mines: " << DisplayMineCount << "\n"
-            << "Nearby Treasure: " << DisplayTreasureCount << "\n";
-
+        if (_Debug) {
+            ss << "Screen: " << mousePosScreen.x << " " << mousePosScreen.y << "\n"
+                << "Window: " << mousePosWindow.x << " " << mousePosWindow.y << "\n"
+                << "View: " << mousePosView.x << " " << mousePosView.y << "\n"
+                << "Grid: " << mousePosGrid.x << " " << mousePosGrid.y << "\n"
+                << "Treasure: " << ObjHandler.m_Treasure << "\n"
+                << "Nearby Mines: " << DisplayMineCount << "\n"
+                << "Nearby Treasure: " << DisplayTreasureCount << "\n";
+        }
+        
         DebugText.setString(ss.str());
 
         sf::Event event;
@@ -255,6 +266,25 @@ int main()
                     g_VSync.m_ButtonDownVisual.setFillColor(sf::Color::Green);
                     std::cerr << _VSync << std::endl;
                 }
+
+                // Volume up
+                if (g_Volume.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    if (Volume < 100) {
+                        Volume += 10;
+                    }
+                    g_Volume.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << Volume << "%" << std::endl;
+                }
+                // Volume down
+                if (g_Volume.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    if (Volume > 0) {
+                        Volume -= 10;
+                    }
+                    g_Volume.m_ButtonDownVisual.setFillColor(sf::Color::Green);
+                    std::cerr << Volume << "%" << std::endl;
+                }
             }
             if (DebugEvent.type == sf::Event::MouseButtonReleased) {
                 g_ViewSpeed.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
@@ -263,6 +293,8 @@ int main()
                 g_Save.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
                 g_VSync.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
                 g_VSync.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+                g_Volume.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                g_Volume.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
             }
         }
        
@@ -339,6 +371,7 @@ int main()
             g_ViewSpeed.Draw(&DebugWindow);
             g_Save.Draw(&DebugWindow);
             g_VSync.Draw(&DebugWindow);
+            g_Volume.Draw(&DebugWindow);
             DebugWindow.display();
         }
     }
