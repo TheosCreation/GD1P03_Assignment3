@@ -22,5 +22,6 @@ public:
 	void Destroy();
 	void Treasure(int _Treasure);
 	void save();
+	void LoadFromFile(std::string _fileName);
 };
 

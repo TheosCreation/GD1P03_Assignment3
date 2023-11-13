@@ -22,8 +22,11 @@ int main()
         int Battle = 0;
 
         while (PlayAgain) {
-            if (Win) {
+            if (Win&& Battle <3) {
                 Battle++;
+            }
+            else {
+                Battle = 1;
             }
             Loops++;
             // Loaded Variables
@@ -110,6 +113,12 @@ int main()
             //Menu Buttons
             Button g_PlayAgain(sf::Vector2f(800, 800), sf::Vector2f(230, 70), font, sf::Vector2f(805, 800), 50);
             g_PlayAgain.m_ButtonUpText.setString("Play Again");
+            //Save Button
+            Button g_MainSave(sf::Vector2f(10, 1000), sf::Vector2f(230, 70), font, sf::Vector2f(75, 1000), 50);
+            g_MainSave.m_ButtonUpText.setString("Save");         
+            //Load Button
+            Button g_MainLoad(sf::Vector2f(1680, 1000), sf::Vector2f(230, 70), font, sf::Vector2f(1750, 1000), 50);
+            g_MainLoad.m_ButtonUpText.setString("Load");
 
             //Debug Buttons
             Button g_ViewSpeed(sf::Vector2f(320, 10), sf::Vector2f(360, 10), sf::Vector2f(20, 20), font, sf::Vector2f(10, 10),
@@ -240,9 +249,37 @@ int main()
                         Window.close();
                     }
                     if (event.type == sf::Event::MouseButtonPressed) {
+                        if (g_MainSave.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(Window))))
+                        {
+                            tileMap.save("SavedGame");
+                            EnemyHandler.save();
+                            ObjHandler.save();
+                            g_MainSave.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                            std::cerr << "Saved Game" << std::endl;
 
+                        } 
+                        // Load Game
+                        if (g_MainLoad.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(Window))))
+                        {
+                            //delete &ObjHandler;
+                            tileMap.load("Assets/Saved/SavedGame.txt");
+                            ObjHandler = Controler();
+                            ObjHandler.LoadFromFile("Assets/Saved/SavedBattle.txt");
+                            EnemyHandler.LoadFromFile("Assets/Saved/Enemies.txt");
+                            /*for (int i = 0; i < 10; i++)
+                            {
+                                std::cout << m_EnemyObjArray[i] << std::endl;
+                                std::cout << m_EnemyObjArray[i]->m_UnitType << std::endl;
+                            }*/
+                           // EnemyHandler.InstObjects(ObjHandler);
+                            g_MainLoad.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                            std::cerr << "Loaded Game" << std::endl;
+                        }
 
                         EnemyHandler.MoveTile(ObjHandler.SelectObj(mousePosGrid));
+                    }
+                    if (event.type == sf::Event::MouseButtonReleased) {
+                        g_MainSave.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
                     }
                     if (_Debug && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Tilde)
                     {
@@ -288,7 +325,8 @@ int main()
                             g_Save.m_ButtonUpVisual.setFillColor(sf::Color::Green);
                             std::cerr << "Saved Game" << std::endl;
 
-                        }
+                        }        
+                    
                         // Load Game
                         if (g_Save.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
                         {
@@ -486,7 +524,7 @@ int main()
                     obj->draw(&Window);
                 }
 
-                for (Object* obj : ObjHandler.EnemyObjArray)
+                for (Object* obj : EnemyHandler.m_EnemyObjArray)
                 {
                     obj->Update();
                     obj->draw(&Window);
@@ -501,14 +539,15 @@ int main()
 
                 //draw Ui
                 Window.draw(Ui);
-
+                g_MainSave.Draw(&Window);
+                g_MainLoad.Draw(&Window);
                 Window.display();
-
+              
                 // if debug is true in file update and draw to debug window
                 if (_Debug) {
                     DebugWindow.clear();
                     g_ViewSpeed.Draw(&DebugWindow);
-                    g_Save.Draw(&DebugWindow);
+                    g_Save.Draw(&DebugWindow); 
                     g_VSync.Draw(&DebugWindow);
                     g_Volume.Draw(&DebugWindow);
                     g_GameWin.Draw(&DebugWindow);

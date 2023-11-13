@@ -206,21 +206,7 @@ void TileMap::load(std::string _FileName)
                     tileMap[x][y].m_TileSprite.setPosition(x * gridSizeF, y * gridSizeF);
                     tileMap[x][y].m_Pos = sf::Vector2i(x, y);
                     
-                    switch (tileMap[x][y].m_TileType)
-                    {
-                        //defines property of tiles 
-                    case Type_Water:
-                        tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
-                        break;
-                    case Type_Mine:
-                        tileMap[x][y].SetSprite("Assets/Sprites/Bomb.png");
-                        break;
-                    case Type_Treasure:
-                        tileMap[x][y].SetSprite("Assets/Sprites/Treasure.png");
-                        break;
-                    default:
-                        break;
-                    }
+                     tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
                     break;
                 default:
                     switcher++;

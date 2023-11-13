@@ -106,3 +106,57 @@ void EnemyControler::save()
     SavedEnemies.close();
     
 }
+void EnemyControler::LoadFromFile(std::string _fileName)
+{
+    std::ifstream ObjFile(_fileName);
+
+    if (!ObjFile) {
+        std::cerr << "File not found" + _fileName << std::endl;
+        ObjFile.close();
+        return;
+    }
+
+    int x = 0;
+    int y = 0;
+    int ArrayPos = 0;
+    char Type;
+    bool Ally = true;
+    Object* NewObject = nullptr;
+
+    while (ObjFile >> Type) {
+        if (Type == 'a') {
+            continue;
+        }
+        if (Type == 'e') {
+            Ally = false;
+            ArrayPos = 0;
+            continue;
+        }
+
+        ObjFile >> x >> y;
+        
+        if(!Ally){
+            switch (Type)
+            {
+            case 'c':
+                NewObject = new Object(Type_EnemyPiece, Type_Cruise, sf::Vector2f(x, y), 64.0f);
+                break;
+            case 'j':
+                NewObject = new Object(Type_EnemyPiece, Type_JetSki, sf::Vector2f(x, y), 64.0f);
+                break;
+            case 'p':
+                NewObject = new Object(Type_EnemyPiece, Type_PirateShip, sf::Vector2f(x, y), 64.0f);
+                break;
+            default:
+                std::cerr << "Unknown object type: " << Type << std::endl;
+                continue; // Skip to the next iteration of the loop
+            }
+            m_EnemyObjArray[ArrayPos] = NewObject;
+            ArrayPos++;
+            std::cout << ArrayPos << std::endl;
+        }
+
+    }
+ 
+    ObjFile.close();
+}

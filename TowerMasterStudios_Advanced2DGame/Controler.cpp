@@ -161,7 +161,7 @@ void Controler::save()
 
         SavedObjects << type << " " << AllyObjArray[i]->m_TilePos.x << " " << AllyObjArray[i]->m_TilePos.y << std::endl;
     }
-    std::ifstream ObjFile("Assets/Saved/Enemies.txt");
+  /*  std::ifstream ObjFile("Assets/Saved/Enemies.txt");
     int x = 0;
     int y = 0;
     int ArrayPos = 0;
@@ -195,6 +195,6 @@ void Controler::save()
         }
     
     }
-    ObjFile.close();
+    ObjFile.close();*/
     SavedObjects.close();
 }
