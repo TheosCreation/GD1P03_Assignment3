@@ -22,6 +22,7 @@ public:
 	unsigned int ShowingMine = 0;
 	bool Active = true;
 	void ObjInTile(Controler* _ObjHandler, EnemyControler* _EnemyHandler);
+	void ShowTile();
 	void SetSprite(sf::String _Path);
 	void SetNeighbours();
 	int m_MineCount = 0;

@@ -91,6 +91,20 @@ int main()
             Ui.setFillColor(sf::Color::Green);
             Ui.setFont(font);
             Ui.setPosition(100.0f, 20.0f);
+            
+            //Text for Win Screen
+            sf::Text WinUI;
+            WinUI.setCharacterSize(128);
+            WinUI.setFillColor(sf::Color::Green);
+            WinUI.setFont(font);
+            WinUI.setPosition(700.0f, 200.0f);
+            
+            //Text for Lose Screen
+            sf::Text LoseUI;
+            LoseUI.setCharacterSize(128);
+            LoseUI.setFillColor(sf::Color::Green);
+            LoseUI.setFont(font);
+            LoseUI.setPosition(700.0f, 200.0f);
 
 
             //Debug Window
@@ -156,6 +170,12 @@ int main()
             g_GameWin.m_TitleText.setString("Game Win");
             g_GameWin.m_ButtonUpText.setString("Enable");
             g_GameWin.m_ButtonDownText.setString("Disable");
+            
+            Button g_ShowTile(sf::Vector2f(295, 200), sf::Vector2f(360, 200), sf::Vector2f(55, 20), font, sf::Vector2f(10, 200),
+                sf::Vector2f(300, 200), sf::Vector2f(365, 200), 15);
+            g_ShowTile.m_TitleText.setString("Show Tile");
+            g_ShowTile.m_ButtonUpText.setString("Enable");
+            g_ShowTile.m_ButtonDownText.setString("Disable");
 
             // controler
             ObjHandler.LoadFromFile("Assets/Battles/Battle" + std::to_string(Battle) + ".txt");
@@ -210,7 +230,7 @@ int main()
                 // update game
                 tileSelector.setPosition(mousePosGrid.x * gridSizeF, mousePosGrid.y * gridSizeF);
 
-                // update ui
+                // update debug ui
                 int DisplayMineCount = -1;
                 int DisplayTreasureCount = -1;
                 if (mousePosGrid.x < tileMap.mapSize && mousePosGrid.y < tileMap.mapSize) {
@@ -228,6 +248,14 @@ int main()
                 Treasure << "Treasure: " << ObjHandler.m_Treasure << "\n"
                     << "Enemy Treasure: " << EnemyHandler.m_Treasure << "\n";
                 Ui.setString(Treasure.str());
+                
+                std::stringstream WinText;
+                WinText << "You Win";
+                WinUI.setString(WinText.str());
+                
+                std::stringstream LoseText;
+                LoseText << "You Lose";
+                LoseUI.setString(LoseText.str());
 
                 std::stringstream ss;
                 if (_Debug) {
@@ -246,6 +274,7 @@ int main()
                 while (Window.pollEvent(event))
                 {
                     if (event.type == sf::Event::Closed) {
+                        PlayAgain = false;
                         Window.close();
                     }
                     if (event.type == sf::Event::MouseButtonPressed) {
@@ -266,20 +295,18 @@ int main()
                             ObjHandler = Controler();
                             ObjHandler.LoadFromFile("Assets/Saved/SavedBattle.txt");
                             EnemyHandler.LoadFromFile("Assets/Saved/Enemies.txt");
-                            /*for (int i = 0; i < 10; i++)
-                            {
-                                std::cout << m_EnemyObjArray[i] << std::endl;
-                                std::cout << m_EnemyObjArray[i]->m_UnitType << std::endl;
-                            }*/
-                           // EnemyHandler.InstObjects(ObjHandler);
                             g_MainLoad.m_ButtonUpVisual.setFillColor(sf::Color::Green);
                             std::cerr << "Loaded Game" << std::endl;
                         }
 
                         EnemyHandler.MoveTile(ObjHandler.SelectObj(mousePosGrid));
+                        if (event.key.code == sf::Mouse::Right) {
+                            tileMap.SetFlag(mousePosGrid);
+                        }
                     }
                     if (event.type == sf::Event::MouseButtonReleased) {
                         g_MainSave.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                        g_MainLoad.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
                     }
                     if (_Debug && event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Tilde)
                     {
@@ -334,7 +361,7 @@ int main()
                             tileMap.load("Assets/Saved/SavedGame.txt");
                             ObjHandler = Controler();
                             ObjHandler.LoadFromFile("Assets/Saved/SavedBattle.txt");
-                            EnemyHandler.InstObjects(ObjHandler);
+                            EnemyHandler.LoadFromFile("Assets/Saved/Enemies.txt");
                             g_Save.m_ButtonDownVisual.setFillColor(sf::Color::Green);
                             std::cerr << "Loaded Game" << std::endl;
                         }
@@ -402,6 +429,29 @@ int main()
                             g_GameOver.m_ButtonDownVisual.setFillColor(sf::Color::Green);
                             std::cerr << ObjHandler.GameOver << std::endl;
                         }
+                        
+                        // ShowTile Enable
+                        if (g_ShowTile.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                        {
+                            for (int x = 0; x < tileMap.mapSize; x++)
+                            {
+
+                                for (int y = 0; y < tileMap.mapSize; y++)
+                                {
+                                    tileMap.tileMap[x][y].ShowTile();
+                                }
+
+                            }
+                            g_ShowTile.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                            std::cerr << "Show Tile Enabled" << std::endl;
+                        }
+                        // ShowTile Disable
+                        if (g_ShowTile.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                        {
+                            ObjHandler.GameOver = true;
+                            g_ShowTile.m_ButtonDownVisual.setFillColor(sf::Color::Green);
+                            std::cerr << "Show Tile Disabled" << std::endl;
+                        }
                     }
                     if (DebugEvent.type == sf::Event::MouseButtonReleased) {
                         g_ViewSpeed.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
@@ -416,8 +466,24 @@ int main()
                         g_GameWin.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
                         g_GameOver.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
                         g_GameOver.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+                        g_ShowTile.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                        g_ShowTile.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
                     }
                 }
+
+                // Handles Game Win/Lose Condition
+                if (ObjHandler.m_Treasure >= 10) {
+                    ObjHandler.GameWin = true;
+                }
+                
+                if (EnemyHandler.m_Treasure >= 10) {
+                    ObjHandler.GameOver = true;
+                }
+                
+                if (ObjHandler.m_Health <= 0) {
+                    ObjHandler.GameOver = true;
+                }
+                // Handles game Win
                 if (ObjHandler.GameWin) {
                     WinScreen.setVisible(true);
                     Win = true;
@@ -425,6 +491,7 @@ int main()
                 else {
                     WinScreen.setVisible(false);
                 }
+
                 sf::Event WinScreenEvent;
                 while (WinScreen.pollEvent(WinScreenEvent))
                 {
@@ -446,6 +513,7 @@ int main()
                     }
                 }
 
+                // Handles game over/lose
                 if (ObjHandler.GameOver) {
                     LoseScreen.setVisible(true);
                     Win = false;
@@ -552,16 +620,19 @@ int main()
                     g_Volume.Draw(&DebugWindow);
                     g_GameWin.Draw(&DebugWindow);
                     g_GameOver.Draw(&DebugWindow);
+                    g_ShowTile.Draw(&DebugWindow);
                     DebugWindow.display();
                 }
                 if (ObjHandler.GameWin) {
                     WinScreen.clear();
+                    WinScreen.draw(WinUI);
                     g_PlayAgain.Draw(&WinScreen);
                     WinScreen.display();
                 }
                 if (ObjHandler.GameOver) {
 
                     LoseScreen.clear();
+                    LoseScreen.draw(LoseUI);
                     g_PlayAgain.Draw(&LoseScreen);
                     LoseScreen.display();
                 } 

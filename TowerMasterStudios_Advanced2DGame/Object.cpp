@@ -12,16 +12,11 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 	sf::Color Purple(142, 22, 166, 128);
 	sf::Color Blue(22, 56, 166, 128);
 	sf::Color GreenA(79, 174, 54, 128);
-
+	sf::Color Yellow(255, 255, 143, 128);
 
 	sf::Color Red(255, 0, 0, 128);
 	sf::Color Green(0, 255, 0, 128);
 
-
-	
-
-	
-	
 	m_ObjType = _ObjType;
 	m_UnitType = _UnitType;
 	switch (m_ObjType)
@@ -42,8 +37,8 @@ Object::Object(ObjectType _ObjType, UnitType _UnitType, sf::Vector2f _Position, 
 	{
 	case Type_Cruise:
 		m_MaxMoveDistance = 1;
-		m_ObjShape.setFillColor(Purple);
-		m_Color = Purple;
+		m_ObjShape.setFillColor(Yellow);
+		m_Color = Yellow;
 		break;
 	case Type_JetSki:
 		m_MaxMoveDistance = 2;
@@ -64,20 +59,13 @@ Object::~Object()
 {
 }
 
-
-
-
-
 void Object::Input()
 {
 	m_ObjSpeed = sf::Vector2f(0.5, 0);
 
 	m_ObjShape.move(m_ObjSpeed);
 }
-//void Object::initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF)
-//{
-//	
-//}
+
 void Object::draw(sf::RenderWindow* _window)
 {
 	_window->draw(m_ObjShape);

@@ -25,7 +25,6 @@ void Tile::ObjInTile(Controler* _ObjHandler, EnemyControler* _EnemyHandler)
 			}
 			break;
 		case Type_Water:
-
 			m_Explored = true;
 			SetSprite((  std::string("Assets/Sprites/WaterExplored").append(std::to_string(m_MineCount))  ).append(".png"));
 			break;
@@ -66,6 +65,24 @@ void Tile::ObjInTile(Controler* _ObjHandler, EnemyControler* _EnemyHandler)
 		
 	}
 	
+}
+
+void Tile::ShowTile()
+{
+	switch (m_TileType)
+	{
+	case Type_Mine:
+		SetSprite("Assets/Sprites/Bomb.png");
+		break;
+	case Type_Treasure:
+		SetSprite("Assets/Sprites/Treasure.png");
+		break;
+	case Type_Water:
+		SetSprite((std::string("Assets/Sprites/WaterExplored").append(std::to_string(m_MineCount))).append(".png"));
+		break;
+	default:
+		break;
+	}
 }
 
 void Tile::SetSprite(sf::String _Path)

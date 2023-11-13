@@ -1,10 +1,10 @@
 # _VSync 0-false, 1-true
 1
 # _Debug 0-false, 1-true
-1
+0
 # WindowSize.x
 1920
 # WindowSize.y
 1080
 # Volume 0-100
-0
+50

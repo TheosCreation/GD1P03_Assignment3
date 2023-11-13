@@ -25,5 +25,6 @@ public:
 	void update(sf::View _view, Controler* _ctrl, EnemyControler* _ectrl);
 	void save(std::string _FileName);
 	void load(std::string _FileName);
+	void SetFlag(sf::Vector2u _MousePositionGrid);
 };
 

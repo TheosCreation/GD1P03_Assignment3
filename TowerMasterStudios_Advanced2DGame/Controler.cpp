@@ -2,18 +2,6 @@
 
 void Controler::InstObjects()
 {
-   /* int ArrayPos = 0;
-    for (int i = 1; i < 2; i++)
-    {
-        for (int j = 1; j < 11; j++)
-        {
-            Object* NewObject = new Object(Type_AllyPiece, Type_Cruise, sf::Vector2f(j, i + 10), 64.0f);
-            //init an object
-            AllyObjArray[ArrayPos] =NewObject;
-            //assign object to this
-            ArrayPos++;
-        }
-    }*/
 }
 
 bool Controler::SelectObj(sf::Vector2u _GridMousePos)
@@ -32,7 +20,7 @@ bool Controler::SelectObj(sf::Vector2u _GridMousePos)
         }
     }
     if(!ObjectHasBeenSelected&& m_HasSelected){
-        //moves ovject
+        //moves object
         sf::Vector2f MoveDistance = sf::Vector2f(abs(m_ObjectSelected->m_TilePos.x - _GridMousePos.x), abs(m_ObjectSelected->m_TilePos.y - _GridMousePos.y));
         if (MoveDistance.x <= m_ObjectSelected->m_MaxMoveDistance && MoveDistance.y <= m_ObjectSelected->m_MaxMoveDistance) {
 

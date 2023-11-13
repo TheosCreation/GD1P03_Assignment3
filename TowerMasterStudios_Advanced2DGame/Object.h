@@ -24,7 +24,7 @@ public:
 	ObjectType m_ObjType;
 	UnitType m_UnitType;
 	
-	sf::Vector2f m_TilePos; // change to set spots 
+	sf::Vector2f m_TilePos;
 	bool IsSelected = false;
 	int m_MaxMoveDistance = 1;
 	sf::Color m_Color;
@@ -33,7 +33,6 @@ public:
 
 	void Update();
 	void Input();
-	//void initObject(ObjectType _Type, sf::Vector2f _Position, float _gridSizeF);
 	void draw(sf::RenderWindow* _window);
 
 };

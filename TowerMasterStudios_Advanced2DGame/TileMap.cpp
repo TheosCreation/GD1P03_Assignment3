@@ -30,21 +30,6 @@ TileMap::TileMap(int _mapSize, float _gridSizeF)
             }
 
             tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
-            //switch (tileMap[x][y].m_TileType)
-            //{
-            ////defines property of tiles 
-            //case Type_Water:
-            //    tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
-            //    break;
-            //case Type_Mine:
-            //    tileMap[x][y].SetSprite("Assets/Sprites/Bomb.png");
-            //    break;
-            //case Type_Treasure:
-            //    tileMap[x][y].SetSprite("Assets/Sprites/Treasure.png");
-            //    break;
-            //default:
-            //    break;
-            //}
         }
     }
     for (int x = 0; x < mapSize; x++)
@@ -205,8 +190,9 @@ void TileMap::load(std::string _FileName)
                 case 'g':
                     tileMap[x][y].m_TileSprite.setPosition(x * gridSizeF, y * gridSizeF);
                     tileMap[x][y].m_Pos = sf::Vector2i(x, y);
-                    
-                     tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
+                    if (tileMap[x][y].Active) {
+                        tileMap[x][y].SetSprite("Assets/Sprites/Water.png");
+                    }
                     break;
                 default:
                     switcher++;
@@ -230,6 +216,9 @@ void TileMap::load(std::string _FileName)
                         std::cout << "aaaa";
                         break;
                     }
+                    if (!tileMap[x][y].Active) {
+                        tileMap[x][y].ShowTile();
+                    }
                     break;
                 }
             }
@@ -246,3 +235,9 @@ void TileMap::load(std::string _FileName)
     }
     ObjFile.close();
 }
+
+void TileMap::SetFlag(sf::Vector2u _MousePositionGrid)
+{
+    tileMap[_MousePositionGrid.x][_MousePositionGrid.y].SetSprite("Assets/Sprites/Flag.png");
+}
+
