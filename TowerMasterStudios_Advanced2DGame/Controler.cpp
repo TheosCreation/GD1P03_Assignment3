@@ -71,6 +71,7 @@ void Controler::LoadFromFile(std::string _fileName)
 
     if (!ObjFile) {
         std::cerr << "File not found" + _fileName << std::endl;
+        ObjFile.close();
         return;
     }
 
@@ -129,6 +130,7 @@ void Controler::LoadFromFile(std::string _fileName)
         }
         
     }
+    ObjFile.close();
 }
 
 void Controler::save()
@@ -189,4 +191,6 @@ void Controler::save()
         }
     
     }
+    ObjFile.close();
+    SavedObjects.close();
 }

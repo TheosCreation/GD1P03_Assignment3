@@ -19,7 +19,8 @@ void FileManager::LoadValuesFromFile(const std::string& _filename, bool& _VSync,
 
     std::string key;
     int Count = 1;
-    while (file >> key) {
+    
+    while(file >> key) {
         if (key == "#") {
             // Skip the comment line
             std::getline(file, key);

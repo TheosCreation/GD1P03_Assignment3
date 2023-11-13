@@ -29,19 +29,24 @@ void EnemyControler::MoveTile(bool _Move)
         int newPosY;
         std::vector<int> oldPosX;
         std::vector<int> oldPosY;
-
-        while (!ableToSet) {
+        int MaxWhile = 0;
+        while (!ableToSet && MaxWhile<8) {
+            MaxWhile++;
             bool work = true;;
+            int MaxWhileX = 0;
+            int MaxWhileY = 0;
             do{
              newPosX = (rand() % (maxMove * 2) - maxMove) * 64
             + m_EnemyObjArray[random]->m_Pos.x;
+             MaxWhileX++;
             }
-            while (std::find(oldPosX.begin(), oldPosX.end(), newPosX) != oldPosX.end()||int(newPosX/64)>20 || int(newPosX / 64) < 0);
+            while (std::find(oldPosX.begin(), oldPosX.end(), newPosX) != oldPosX.end()||int(newPosX/64)>20 || int(newPosX / 64) < 0&& MaxWhileX <8);
             do {
                 newPosY = (rand() % (maxMove * 2) - maxMove) * 64
                     + m_EnemyObjArray[random]->m_Pos.y;
+                MaxWhileY++;
             }
-            while (std::find(oldPosY.begin(), oldPosY.end(), newPosY) != oldPosY.end()||int(newPosY/64)>19 || int(newPosY / 64) < 1);
+            while (std::find(oldPosY.begin(), oldPosY.end(), newPosY) != oldPosY.end()||int(newPosY/64)>19 || int(newPosY / 64) < 1&& MaxWhile<8);
    
             for (int i = 0; i < 10; i++)
             {
@@ -97,5 +102,6 @@ void EnemyControler::save()
     
         SavedEnemies << type << " " << m_EnemyObjArray[i]->m_TilePos.x << " " << m_EnemyObjArray[i]->m_TilePos.y << std::endl;
     }
+    SavedEnemies.close();
     
 }
