@@ -101,7 +101,7 @@ void EnemyControler::save()
             break;
         }
     
-        SavedEnemies << type << " " << m_EnemyObjArray[i]->m_TilePos.x << " " << m_EnemyObjArray[i]->m_TilePos.y << std::endl;
+        SavedEnemies << type << " " << m_EnemyObjArray[i]->m_Pos.x << " " << m_EnemyObjArray[i]->m_Pos.y << std::endl;
     }
     SavedEnemies.close();
     
@@ -124,18 +124,14 @@ void EnemyControler::LoadFromFile(std::string _fileName)
     Object* NewObject = nullptr;
 
     while (ObjFile >> Type) {
-        if (Type == 'a') {
-            continue;
-        }
         if (Type == 'e') {
-            Ally = false;
-            ArrayPos = 0;
+           // Ally = false;
             continue;
         }
 
         ObjFile >> x >> y;
         
-        if(!Ally){
+       // if(!Ally){
             switch (Type)
             {
             case 'c':
@@ -153,8 +149,8 @@ void EnemyControler::LoadFromFile(std::string _fileName)
             }
             m_EnemyObjArray[ArrayPos] = NewObject;
             ArrayPos++;
-            std::cout << ArrayPos << std::endl;
-        }
+            std::cout << "x: " << x << "y:" << y << std::endl;
+        //}
 
     }
  
