@@ -14,9 +14,9 @@ public:
 	int m_Treasure = 0;
 	sf::Vector2f m_MovedToTile;
 	bool m_HasSelected = false;
-	EnemyControler(Controler _ControlerRef);
+	EnemyControler();
 	~EnemyControler();
-	void InstObjects();
+	void InstObjects(Controler _ControlerRef);
 	void MoveTile(bool _Move);
 	void Destroy();
 	void Treasure(int _Treasure);

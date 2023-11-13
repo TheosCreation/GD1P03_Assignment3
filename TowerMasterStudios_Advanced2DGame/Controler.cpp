@@ -158,7 +158,7 @@ void Controler::LoadFromFile(std::string _fileName)
 
 void Controler::save()
 {
-    std::ofstream SavedObjects("SavedBattle.txt");
+    std::ofstream SavedObjects("Assets/Saved/SavedBattle.txt");
     SavedObjects << "a" << std::endl;
     char type = ' ';
     for (int i = 0; i < 10; i++) {
@@ -180,15 +180,18 @@ void Controler::save()
 
         SavedObjects << type << " " << AllyObjArray[i]->m_TilePos.x << " " << AllyObjArray[i]->m_TilePos.y << std::endl;
     }
-    std::ifstream ObjFile("Assets/Battles/Battle1.txt");
+    std::ifstream ObjFile("Assets/Saved/Enemies.txt");
     int x = 0;
     int y = 0;
     int ArrayPos = 0;
-    char Type;
+    char Type = ' ';
     std::cout << ObjFile.is_open();
 
     while (ObjFile >> Type) {
-        ObjFile >> x >> y;
+        std::cout << "a";
+        if(Type!='e'){
+         ObjFile >> x >> y;
+        }
         if (!ObjFile) {
             std::cout << "File not found" << std::endl;
             //return;

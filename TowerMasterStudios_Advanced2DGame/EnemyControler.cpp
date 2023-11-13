@@ -1,20 +1,21 @@
 #include "EnemyControler.h"
-EnemyControler::EnemyControler(Controler _ControlerRef)
+EnemyControler::EnemyControler()
 {
   
-    m_AllyControlerRef = &_ControlerRef;
-    
-    for (int i = 0; i < 10; i++) {
-        m_EnemyObjArray[i] =  m_AllyControlerRef->EnemyObjArray[i];
-    }
-    
     
 }
 EnemyControler::~EnemyControler()
 {
 }
-void EnemyControler::InstObjects()
+void EnemyControler::InstObjects(Controler _ControlerRef)
 {
+
+    m_AllyControlerRef = &_ControlerRef;
+
+    for (int i = 0; i < 10; i++) {
+        m_EnemyObjArray[i] = m_AllyControlerRef->EnemyObjArray[i];
+    }
+
     /*int ArrayPos = 0;
     for (int i = 1; i < 2; i++)
     {
@@ -30,11 +31,11 @@ void EnemyControler::InstObjects()
         }
     }*/
     
-    for (int i = 0; i < 10; i++) {
+   // for (int i = 0; i < 10; i++) {
        //m_EnemyObjArray.push_back( m_AllyControlerRef->EnemyObjArray[i]);
        //m_EnemyObjArray.push_back( m_AllyControlerRef->EnemyObjArray[i]);
-      std::cout << m_EnemyObjArray[i] <<std::endl;
-    }
+   //   std::cout << m_EnemyObjArray[i] <<std::endl;
+  //  }
 }
 
 void EnemyControler::MoveTile(bool _Move)
@@ -112,7 +113,7 @@ void EnemyControler::Treasure(int _Treasure)
 
 void EnemyControler::save()
 {
-    std::ofstream SavedEnemies("Assets/Enemies.txt");
+    std::ofstream SavedEnemies("Assets/Saved/Enemies.txt");
     SavedEnemies << "e" << std::endl;
     char type = ' ';
     for (int i = 0; i < 10; i++) {

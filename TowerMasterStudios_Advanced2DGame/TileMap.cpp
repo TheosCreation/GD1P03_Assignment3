@@ -145,7 +145,7 @@ void TileMap::update(sf::View _view, Controler* _ctrl, EnemyControler* _ectrl)
 void TileMap::save(std::string _FileName)
 {
 
-    std::ofstream SavedGame(_FileName+".txt");
+    std::ofstream SavedGame("Assets/Saved/"+_FileName + ".txt");
     SavedGame << "L" << std::endl;
     for (int y = 0; y < mapSize; y++)
     {

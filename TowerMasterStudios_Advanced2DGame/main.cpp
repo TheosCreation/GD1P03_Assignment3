@@ -93,8 +93,8 @@ int main()
 
     // controler
     ObjHandler.LoadFromFile("Assets/Battles/Battle3.txt");
-    EnemyControler EnemyHandler(ObjHandler);
-    EnemyHandler.InstObjects();
+    EnemyControler EnemyHandler;
+    EnemyHandler.InstObjects(ObjHandler);
 
     // tilemap
     int mapsize = 20;
@@ -216,7 +216,10 @@ int main()
                 // View Speed decrease
                 if (g_Save.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
                 {
-                   
+                    //delete &ObjHandler;
+                    ObjHandler = Controler();
+                    ObjHandler.LoadFromFile("Assets/Saved/SavedBattle.txt");
+                    EnemyHandler.InstObjects(ObjHandler);
                     g_Save.m_ButtonDownVisual.setFillColor(sf::Color::Green);
                 }
             }
