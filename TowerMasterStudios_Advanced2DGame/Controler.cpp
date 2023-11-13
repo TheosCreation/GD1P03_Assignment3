@@ -55,10 +55,13 @@ void Controler::Destroy()
 {
     m_Health--;
     if(m_ObjectSelected!= nullptr){
-     m_ObjectSelected->m_TilePos.x = -1;
-     m_ObjectSelected->m_TilePos.y = -1;
-     m_ObjectSelected->m_ObjShape.setPosition(-1,-1);
-     m_ObjectSelected->m_ObjShape.setSize(sf::Vector2f(0,0));
+        m_ObjectSelected->m_TilePos.x = -1;
+        m_ObjectSelected->m_TilePos.y = -1;
+        m_ObjectSelected->m_ObjShape.setPosition(-1,-1);
+        m_ObjectSelected->m_ObjShape.setSize(sf::Vector2f(0,0));
+    }
+    if (m_Health <= 0) {
+        GameOver = true;
     }
 }
 void Controler::Treasure(int _Treasure)

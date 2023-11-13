@@ -134,7 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Controler.cpp" />
-    <ClCompile Include="Debug.cpp" />
+    <ClCompile Include="Button.cpp" />
     <ClCompile Include="EnemyControler.cpp" />
     <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="main.cpp" />
@@ -144,7 +144,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Controler.h" />
-    <ClInclude Include="Debug.h" />
+    <ClInclude Include="Button.h" />
     <ClInclude Include="EnemyControler.h" />
     <ClInclude Include="FileManager.h" />
     <ClInclude Include="Object.h" />

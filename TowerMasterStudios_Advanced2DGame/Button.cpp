@@ -1,6 +1,6 @@
-#include "Debug.h"
+#include "Button.h"
 
-Debug::Debug(sf::Vector2f _UpButtonPos, sf::Vector2f _DownButtonPos, sf::Vector2f _ButtonSize, sf::Font& _Font, sf::Vector2f _TitleTextPos, sf::Vector2f _UpTextPos, sf::Vector2f _DownTextPos, float _TextSize)
+Button::Button(sf::Vector2f _UpButtonPos, sf::Vector2f _DownButtonPos, sf::Vector2f _ButtonSize, sf::Font& _Font, sf::Vector2f _TitleTextPos, sf::Vector2f _UpTextPos, sf::Vector2f _DownTextPos, float _TextSize)
 {
     // up button visual
     m_ButtonUpVisual.setPosition(_UpButtonPos);
@@ -33,16 +33,28 @@ Debug::Debug(sf::Vector2f _UpButtonPos, sf::Vector2f _DownButtonPos, sf::Vector2
     m_TitleText.setCharacterSize(_TextSize);
     m_TitleText.setFillColor(sf::Color::White);
     m_TitleText.setPosition(_TitleTextPos);
+}
+Button::Button(sf::Vector2f _ButtonPos, sf::Vector2f _ButtonSize, sf::Font& _Font, sf::Vector2f _TextPos, float _TextSize)
+{
+    // up button visual
+    m_ButtonUpVisual.setPosition(_ButtonPos);
+    m_ButtonUpVisual.setSize(_ButtonSize);
+    m_ButtonUpVisual.setOutlineColor(sf::Color::White);
+    m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+    m_ButtonUpVisual.setOutlineThickness(2);
 
-
-
+    // up button text
+    m_ButtonUpText.setFont(_Font);
+    m_ButtonUpText.setCharacterSize(_TextSize);
+    m_ButtonUpText.setFillColor(sf::Color::White);
+    m_ButtonUpText.setPosition(_TextPos);
 }
 
-Debug::~Debug()
+Button::~Button()
 {
 }
 
-void Debug::Draw(sf::RenderWindow* _Window)
+void Button::Draw(sf::RenderWindow* _Window)
 {
     _Window->draw(m_TitleText);
     _Window->draw(m_ButtonUpVisual);

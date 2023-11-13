@@ -15,6 +15,8 @@ public:
 	int m_Treasure = 0;
 	bool m_HasSelected = false;
 	int m_Health = 10;
+	bool GameOver = false;
+	bool GameWin = false;
 	void InstObjects();
 	bool SelectObj(sf::Vector2u _GridMousePos);
 	void Destroy();

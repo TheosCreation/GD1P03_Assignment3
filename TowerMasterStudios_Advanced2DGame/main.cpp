@@ -1,7 +1,7 @@
 #include "Controler.h"
 #include "EnemyControler.h"
 #include "TileMap.h"
-#include "Debug.h"
+#include "Button.h"
 #include "FileManager.h"
 #include <SFML/Audio.hpp>
 #include <iostream>
@@ -85,31 +85,58 @@ int main()
     DebugWindow.setPosition(sf::Vector2i(Window.getPosition().x - (400 + 50), Window.getPosition().y));
     DebugWindow.setFramerateLimit(60);
     DebugWindow.setVisible(_Debug);
+    
+    // Win and Lose Screens
+    sf::RenderWindow WinScreen(sf::VideoMode(WindowSize.x, WindowSize.y), "You Win");
+    WinScreen.setPosition(sf::Vector2i(Window.getPosition().x, Window.getPosition().y));
+    WinScreen.setFramerateLimit(60);
+    WinScreen.setVisible(false);
+    
+    sf::RenderWindow LoseScreen(sf::VideoMode(WindowSize.x, WindowSize.y), "You Lose");
+    LoseScreen.setPosition(sf::Vector2i(Window.getPosition().x, Window.getPosition().y));
+    LoseScreen.setFramerateLimit(60);
+    LoseScreen.setVisible(false);
 
-    // Debuging Entry for Gravity
-    Debug g_ViewSpeed(sf::Vector2f(320, 10), sf::Vector2f(360, 10), sf::Vector2f(20, 20), font, sf::Vector2f(10, 10),
+    //Menu Buttons
+    Button g_PlayAgain(sf::Vector2f(800, 800), sf::Vector2f(230, 70), font, sf::Vector2f(805, 800), 50);
+    g_PlayAgain.m_ButtonUpText.setString("Play Again");
+
+    //Debug Buttons
+    Button g_ViewSpeed(sf::Vector2f(320, 10), sf::Vector2f(360, 10), sf::Vector2f(20, 20), font, sf::Vector2f(10, 10),
         sf::Vector2f(325, 10), sf::Vector2f(365, 10), 15);
     g_ViewSpeed.m_TitleText.setString("ViewSpeed");
     g_ViewSpeed.m_ButtonUpText.setString("+");
     g_ViewSpeed.m_ButtonDownText.setString("-");
     
-    Debug g_Save(sf::Vector2f(310, 50), sf::Vector2f(360, 50), sf::Vector2f(40, 20), font, sf::Vector2f(10, 50),
+    Button g_Save(sf::Vector2f(310, 50), sf::Vector2f(360, 50), sf::Vector2f(40, 20), font, sf::Vector2f(10, 50),
         sf::Vector2f(315, 50), sf::Vector2f(365, 50), 15);
     g_Save.m_TitleText.setString("Saving/Loading");
     g_Save.m_ButtonUpText.setString("Save");
     g_Save.m_ButtonDownText.setString("Load");
     
-    Debug g_VSync(sf::Vector2f(295, 80), sf::Vector2f(360, 80), sf::Vector2f(55, 20), font, sf::Vector2f(10, 80),
+    Button g_VSync(sf::Vector2f(295, 80), sf::Vector2f(360, 80), sf::Vector2f(55, 20), font, sf::Vector2f(10, 80),
         sf::Vector2f(300, 80), sf::Vector2f(365, 80), 15);
     g_VSync.m_TitleText.setString("VSync");
     g_VSync.m_ButtonUpText.setString("Enable");
     g_VSync.m_ButtonDownText.setString("Disable");
 
-    Debug g_Volume(sf::Vector2f(320, 110), sf::Vector2f(360, 110), sf::Vector2f(20, 20), font, sf::Vector2f(10, 110),
+    Button g_Volume(sf::Vector2f(320, 110), sf::Vector2f(360, 110), sf::Vector2f(20, 20), font, sf::Vector2f(10, 110),
         sf::Vector2f(325, 110), sf::Vector2f(365, 110), 15);
     g_Volume.m_TitleText.setString("Volume");
     g_Volume.m_ButtonUpText.setString("+");
     g_Volume.m_ButtonDownText.setString("-");
+    
+    Button g_GameOver(sf::Vector2f(295, 140), sf::Vector2f(360, 140), sf::Vector2f(55, 20), font, sf::Vector2f(10, 140),
+        sf::Vector2f(300, 140), sf::Vector2f(365, 140), 15);
+    g_GameOver.m_TitleText.setString("Game Over");
+    g_GameOver.m_ButtonUpText.setString("Enable");
+    g_GameOver.m_ButtonDownText.setString("Disable");
+    
+    Button g_GameWin(sf::Vector2f(295, 170), sf::Vector2f(360, 170), sf::Vector2f(55, 20), font, sf::Vector2f(10, 170),
+        sf::Vector2f(300, 170), sf::Vector2f(365, 170), 15);
+    g_GameWin.m_TitleText.setString("Game Win");
+    g_GameWin.m_ButtonUpText.setString("Enable");
+    g_GameWin.m_ButtonDownText.setString("Disable");
 
     // controler
     ObjHandler.LoadFromFile("Assets/Battles/Battle3.txt");
@@ -297,6 +324,36 @@ int main()
                     g_Volume.m_ButtonDownVisual.setFillColor(sf::Color::Green);
                     std::cerr << Volume << "%" << std::endl;
                 }
+
+                // GameWin Enable
+                if (g_GameWin.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    ObjHandler.GameWin = true;
+                    g_GameWin.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << ObjHandler.GameWin << std::endl;
+                }
+                // GameWin Disable
+                if (g_GameWin.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    ObjHandler.GameWin = false;
+                    g_GameWin.m_ButtonDownVisual.setFillColor(sf::Color::Green);
+                    std::cerr << ObjHandler.GameWin << std::endl;
+                }
+                
+                // GameOver Enable
+                if (g_GameOver.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    ObjHandler.GameOver = true;
+                    g_GameOver.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << ObjHandler.GameOver << std::endl;
+                }
+                // GameOver Disable
+                if (g_GameOver.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    ObjHandler.GameOver = false;
+                    g_GameOver.m_ButtonDownVisual.setFillColor(sf::Color::Green);
+                    std::cerr << ObjHandler.GameOver << std::endl;
+                }
             }
             if (DebugEvent.type == sf::Event::MouseButtonReleased) {
                 g_ViewSpeed.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
@@ -307,13 +364,64 @@ int main()
                 g_VSync.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
                 g_Volume.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
                 g_Volume.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+                g_GameWin.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                g_GameWin.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+                g_GameOver.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                g_GameOver.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
             }
         }
-       
-        //Update
-        
-        
+        if (ObjHandler.GameWin) {
+            WinScreen.setVisible(true);
+        }
+        else {
+            WinScreen.setVisible(false);
+        }
+        sf::Event WinScreenEvent;
+        while (WinScreen.pollEvent(WinScreenEvent))
+        {
+            if (WinScreenEvent.type == sf::Event::MouseButtonPressed)
+            {
+                if (g_PlayAgain.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(WinScreen))))
+                {
+                    g_PlayAgain.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << "Play Again Selected" << std::endl;
+                    DebugWindow.close();
+                    Window.close();
+                    WinScreen.close();
+                    LoseScreen.close();
+                    main();
+                }
+            }
+            if (WinScreenEvent.type == sf::Event::MouseButtonReleased) {
+                g_PlayAgain.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                g_PlayAgain.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+            }
+        }
 
+        if (ObjHandler.GameOver) {
+            LoseScreen.setVisible(true);
+        }
+        else {
+            LoseScreen.setVisible(false);
+        }
+        sf::Event LoseScreenEvent;
+        while (LoseScreen.pollEvent(LoseScreenEvent))
+        {
+            if (LoseScreenEvent.type == sf::Event::MouseButtonPressed)
+            {
+                if (g_PlayAgain.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(LoseScreen))))
+                {
+                    main();
+                    g_PlayAgain.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << "Play Again Selected" << std::endl;
+                }
+            }
+            if (LoseScreenEvent.type == sf::Event::MouseButtonReleased) {
+                g_PlayAgain.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                g_PlayAgain.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+            }
+        }
+        
         //Update Input
         sf::Vector2f topLeft = Window.mapPixelToCoords(sf::Vector2i(0, 0));
         sf::Vector2f bottomRight = topLeft + view.getSize();
@@ -387,7 +495,19 @@ int main()
             g_Save.Draw(&DebugWindow);
             g_VSync.Draw(&DebugWindow);
             g_Volume.Draw(&DebugWindow);
+            g_GameWin.Draw(&DebugWindow);
+            g_GameOver.Draw(&DebugWindow);
             DebugWindow.display();
+        }
+        if (ObjHandler.GameWin) {
+            WinScreen.clear();
+            g_PlayAgain.Draw(&WinScreen);
+            WinScreen.display();
+        }
+        if (ObjHandler.GameOver) {
+            LoseScreen.clear();
+            g_PlayAgain.Draw(&LoseScreen);
+            LoseScreen.display();
         }
     }
 
