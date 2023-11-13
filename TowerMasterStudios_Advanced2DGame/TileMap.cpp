@@ -159,6 +159,7 @@ void TileMap::save(std::string _FileName)
         }
         SavedGame << '\n';
     }
+    SavedGame.close();
 
 }
 
@@ -168,6 +169,7 @@ void TileMap::load(std::string _FileName)
     
     if (!ObjFile) {
         std::cerr << "File not found" + _FileName << std::endl;
+        ObjFile.close();
         return;
     }
 
@@ -256,4 +258,5 @@ void TileMap::load(std::string _FileName)
             tileMap[x][y].SetNeighbours();
         }
     }
+    ObjFile.close();
 }
