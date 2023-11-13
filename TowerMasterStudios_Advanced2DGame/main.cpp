@@ -85,11 +85,18 @@ int main()
     g_ViewSpeed.m_TitleText.setString("ViewSpeed");
     g_ViewSpeed.m_ButtonUpText.setString("+");
     g_ViewSpeed.m_ButtonDownText.setString("-");
-    Debug g_Save(sf::Vector2f(320, 50), sf::Vector2f(360, 50), sf::Vector2f(20, 20), font, sf::Vector2f(10, 50),
-        sf::Vector2f(325, 50), sf::Vector2f(365, 50), 15);
-    g_Save.m_TitleText.setString("Save");
-    g_Save.m_ButtonUpText.setString("+");
-    g_Save.m_ButtonDownText.setString("-");
+    
+    Debug g_Save(sf::Vector2f(310, 50), sf::Vector2f(360, 50), sf::Vector2f(40, 20), font, sf::Vector2f(10, 50),
+        sf::Vector2f(315, 50), sf::Vector2f(365, 50), 15);
+    g_Save.m_TitleText.setString("Saving/Loading");
+    g_Save.m_ButtonUpText.setString("Save");
+    g_Save.m_ButtonDownText.setString("Load");
+    
+    Debug g_VSync(sf::Vector2f(295, 80), sf::Vector2f(360, 80), sf::Vector2f(55, 20), font, sf::Vector2f(10, 80),
+        sf::Vector2f(300, 80), sf::Vector2f(365, 80), 15);
+    g_VSync.m_TitleText.setString("VSync");
+    g_VSync.m_ButtonUpText.setString("Enable");
+    g_VSync.m_ButtonDownText.setString("Disable");
 
     // controler
     ObjHandler.LoadFromFile("Assets/Battles/Battle3.txt");
@@ -197,6 +204,7 @@ int main()
                 {
                     viewSpeed += 100.0f;
                     g_ViewSpeed.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << viewSpeed << std::endl;
                    
                 }
                 // View Speed decrease
@@ -204,16 +212,20 @@ int main()
                 {
                     viewSpeed -= 100.0f;
                     g_ViewSpeed.m_ButtonDownVisual.setFillColor(sf::Color::Green);
+                    std::cerr << viewSpeed << std::endl;
                 } 
+
+                // Save game
                 if (g_Save.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
                 {
                     tileMap.save("SavedGame");
                     EnemyHandler.save();
                     ObjHandler.save();
                     g_Save.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << "Saved Game" << std::endl;
                    
                 }
-                // View Speed decrease
+                // Load Game
                 if (g_Save.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
                 {
                     //delete &ObjHandler;
@@ -221,6 +233,22 @@ int main()
                     ObjHandler.LoadFromFile("Assets/Saved/SavedBattle.txt");
                     EnemyHandler.InstObjects(ObjHandler);
                     g_Save.m_ButtonDownVisual.setFillColor(sf::Color::Green);
+                    std::cerr << "Loaded Game" << std::endl;
+                }
+                
+                // VSync Enable
+                if (g_VSync.m_ButtonUpVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    _VSync = true;
+                    g_VSync.m_ButtonUpVisual.setFillColor(sf::Color::Green);
+                    std::cerr << _VSync << std::endl;
+                }
+                // VSync Disable
+                if (g_VSync.m_ButtonDownVisual.getGlobalBounds().contains(sf::Vector2f(sf::Mouse::getPosition(DebugWindow))))
+                {
+                    _VSync = false;
+                    g_VSync.m_ButtonDownVisual.setFillColor(sf::Color::Green);
+                    std::cerr << _VSync << std::endl;
                 }
             }
             if (DebugEvent.type == sf::Event::MouseButtonReleased) {
@@ -228,6 +256,8 @@ int main()
                 g_ViewSpeed.m_ButtonDownVisual.setFillColor(sf::Color::Transparent); 
                 g_Save.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
                 g_Save.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
+                g_VSync.m_ButtonUpVisual.setFillColor(sf::Color::Transparent);
+                g_VSync.m_ButtonDownVisual.setFillColor(sf::Color::Transparent);
             }
         }
        
@@ -282,6 +312,7 @@ int main()
             DebugWindow.clear();
             g_ViewSpeed.Draw(&DebugWindow);
             g_Save.Draw(&DebugWindow);
+            g_VSync.Draw(&DebugWindow);
             DebugWindow.display();
         }
     }

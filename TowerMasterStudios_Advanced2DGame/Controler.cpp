@@ -18,9 +18,6 @@ void Controler::InstObjects()
 
 bool Controler::SelectObj(sf::Vector2u _GridMousePos)
 {
-    for (int i = 0; i < 10; i++) {
-        std::cout << AllyObjArray[i]->m_ObjType << std::endl;
-    }
     m_Moved = false;
     bool ObjectHasBeenSelected = false;
     for (Object* obj : AllyObjArray) {
@@ -73,7 +70,7 @@ void Controler::LoadFromFile(std::string _fileName)
     std::ifstream ObjFile(_fileName);
 
     if (!ObjFile) {
-        std::cout << "File not found" << std::endl;
+        std::cerr << "File not found" + _fileName << std::endl;
         return;
     }
 
@@ -86,11 +83,9 @@ void Controler::LoadFromFile(std::string _fileName)
 
     while (ObjFile >> Type) {
         if (Type == 'a') {
-            std::cerr << "a: " << "\n";
             continue;
         }
         if (Type == 'e') {
-            std::cerr << "e: " << "\n";
             Ally = false;
             ArrayPos = 0;
             continue;
@@ -101,59 +96,39 @@ void Controler::LoadFromFile(std::string _fileName)
             switch (Type)
             {
             case 'c':
-
-                std::cerr << "c: " << x << " " << y << "\n";
-
                 NewObject = new Object(Type_AllyPiece, Type_Cruise, sf::Vector2f(x, y), 64.0f);
                 break;
             case 'j':
-                std::cerr << "j: " << x << " " << y << "\n";
                 NewObject = new Object(Type_AllyPiece, Type_JetSki, sf::Vector2f(x, y), 64.0f);
                 break;
             case 'p':
-                std::cerr << "p: " << x << " " << y << "\n";
                 NewObject = new Object(Type_AllyPiece, Type_PirateShip, sf::Vector2f(x, y), 64.0f);
                 break;
             default:
-                std::cerr << "Unknown object type: " << Type << std::endl;
                 continue; // Skip to the next iteration of the loop
             }
-        
-            std::cerr << ArrayPos << "\n";
             AllyObjArray[ArrayPos++] = NewObject;
         }
         else {
             switch (Type)
             {
             case 'c':
-
-                std::cerr << "c: " << x << " " << y << "\n";
-
                 NewObject = new Object(Type_EnemyPiece, Type_Cruise, sf::Vector2f(x, y), 64.0f);
                 break;
             case 'j':
-                std::cerr << "j: " << x << " " << y << "\n";
                 NewObject = new Object(Type_EnemyPiece, Type_JetSki, sf::Vector2f(x, y), 64.0f);
                 break;
             case 'p':
-                std::cerr << "p: " << x << " " << y << "\n";
                 NewObject = new Object(Type_EnemyPiece, Type_PirateShip, sf::Vector2f(x, y), 64.0f);
                 break;
             default:
                 std::cerr << "Unknown object type: " << Type << std::endl;
                 continue; // Skip to the next iteration of the loop
             }
-
-            std::cerr << ArrayPos << "\n";
             EnemyObjArray[ArrayPos++] = NewObject;
         }
         
     }
-    for (int i = 0; i < 10; i++)
-    {
-      //  std::cout << EnemyObjArray[i] << std::endl;
-    }
-    
 }
 
 void Controler::save()
@@ -185,17 +160,13 @@ void Controler::save()
     int y = 0;
     int ArrayPos = 0;
     char Type = ' ';
-    std::cout << ObjFile.is_open();
 
     while (ObjFile >> Type) {
-        std::cout << "a";
         if(Type!='e'){
          ObjFile >> x >> y;
         }
         if (!ObjFile) {
-            std::cout << "File not found" << std::endl;
-            //return;
-
+            std::cerr << "File not found: Assets/Saved/Enemies.txt" << std::endl;
         }
 
         switch (Type)

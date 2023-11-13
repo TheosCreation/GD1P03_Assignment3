@@ -13,7 +13,7 @@ void FileManager::LoadValuesFromFile(const std::string& _filename, bool& _VSync,
     std::ifstream file(_filename);
 
     if (!file) {
-        std::cout << "File not found" << std::endl;
+        std::cerr << "File not found" + _filename << std::endl;
         return;
     }
 
