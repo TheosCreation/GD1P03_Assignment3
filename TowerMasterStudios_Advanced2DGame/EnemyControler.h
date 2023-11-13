@@ -12,6 +12,7 @@ public:
 	Object *m_EnemyObjArray[10];
 	Object* m_MovedObj;
 	int m_Treasure = 0;
+	int m_Health = 10;
 	sf::Vector2f m_MovedToTile;
 	bool m_HasSelected = false;
 	EnemyControler();

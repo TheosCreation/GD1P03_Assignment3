@@ -67,6 +67,7 @@ void EnemyControler::MoveTile(bool _Move)
 }
 void EnemyControler::Destroy()
 {
+    m_Health--;
     if (m_MovedObj != nullptr) {
         m_MovedObj->m_TilePos.x = -1;
         m_MovedObj->m_TilePos.y = -1;

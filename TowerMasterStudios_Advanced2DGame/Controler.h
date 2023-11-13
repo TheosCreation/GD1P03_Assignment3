@@ -14,7 +14,7 @@ public:
 	bool m_Moved = false;
 	int m_Treasure = 0;
 	bool m_HasSelected = false;
-
+	int m_Health = 10;
 	void InstObjects();
 	bool SelectObj(sf::Vector2u _GridMousePos);
 	void Destroy();
