@@ -152,7 +152,8 @@ void TileMap::save(std::string _FileName)
         for (int x = 0; x < mapSize; x++)
         {
             SavedGame << " t " << std::to_string(tileMap[x][y].m_TileType) << " " << std::to_string(tileMap[x][y].m_Explored)
-                << " " << std::to_string(tileMap[x][y].Active) << " g ";
+                << " " << std::to_string(tileMap[x][y].Active) << " " <<
+                std::to_string(tileMap[x][y].m_TresureCount) << " " << std::to_string(tileMap[x][y].m_MineCount) << " g ";
         }
         SavedGame << '\n';
     }
@@ -184,8 +185,6 @@ void TileMap::load(std::string _FileName)
     for (std::string line; std::getline(ObjFile, line); )
     {
         int x = -1;
-       
-      
         if (x <= mapSize && y <= mapSize) {
            
             int switcher = 0;
@@ -200,9 +199,9 @@ void TileMap::load(std::string _FileName)
                 case ' ':
                     break;
                 case 'g':
-                    std::cout << "x: " << x << " y: " << y << std::endl;
                     tileMap[x][y].m_TileSprite.setPosition(x * gridSizeF, y * gridSizeF);
                     tileMap[x][y].m_Pos = sf::Vector2i(x, y);
+                    
                     switch (tileMap[x][y].m_TileType)
                     {
                         //defines property of tiles 
@@ -221,37 +220,28 @@ void TileMap::load(std::string _FileName)
                     break;
                 default:
                     switcher++;
-                        switch (switcher) {
-                        case 1:
-                            tileMap[x][y].m_TileType = TileType(ch - '0');
-                            break;
-                        case 2:
-                            tileMap[x][y].m_Explored = bool(ch - '0');
-                            break;
-                        case 3:
-                            tileMap[x][y].Active = bool(ch - '0');
-                            break;
-                        default:
-                            std::cout << "aaaa";
-                            break;
-                        }
-                        
+                    switch (switcher) {
+                    case 1:
+                        tileMap[x][y].m_TileType = TileType(ch - '0');
+                        break;
+                    case 2:
+                        tileMap[x][y].m_Explored = bool(ch - '0');
+                        break;
+                    case 3:
+                        tileMap[x][y].Active = bool(ch - '0');
+                        break;
+                    case 4:
+                        tileMap[x][y].m_TresureCount = int(ch - '0');
+                        break;
+                    case 5:
+                        tileMap[x][y].m_MineCount = int(ch - '0');
+                        break;
+                    default:
+                        std::cout << "aaaa";
+                        break;
+                    }
                     break;
-
                 }
-               
-                
-                
-
-
-
-
-                //summons tilemap tiles? i think
-                /*
-                
-                */
-
-               
             }
             y++;
         }
@@ -261,28 +251,7 @@ void TileMap::load(std::string _FileName)
     {
         for (int y = 0; y < mapSize; y++)
         {
-            int NeighbourCount = 0;
-            for (int i = -1; i < 2; i++)
-            {
-                for (int j = -1; j < 2; j++)
-                {
-
-                    if (i != 0 || j != 0) {
-
-                        int newX = x + i;
-                        int newY = y + j;
-
-                        if (newX >= 0 && newX < mapSize && newY >= 0 && newY < mapSize)
-                        {
-                            tileMap[x][y].m_Neighbours[NeighbourCount] = &tileMap[newX][newY];
-                            NeighbourCount++;
-                            
-                        }
-                    }
-                }
-            }
+            tileMap[x][y].SetNeighbours();
         }
     }
-    
-    
 }
