@@ -2,6 +2,7 @@
 
 TileMap::TileMap(int _mapSize, float _gridSizeF)
 {
+    flag.loadFromFile("Assets/Sprites/Flag.png");
     if (BombTexture) {
         BombTexture->loadFromFile("Assets/Sprites/Bomb.png");
     }
@@ -238,6 +239,14 @@ void TileMap::load(std::string _FileName)
 
 void TileMap::SetFlag(sf::Vector2u _MousePositionGrid)
 {
-    tileMap[_MousePositionGrid.x][_MousePositionGrid.y].SetSprite("Assets/Sprites/Flag.png");
+    if(tileMap[_MousePositionGrid.x][_MousePositionGrid.y].flag){
+        tileMap[_MousePositionGrid.x][_MousePositionGrid.y].SetSprite("Assets/Sprites/Water.png"); 
+        tileMap[_MousePositionGrid.x][_MousePositionGrid.y].flag = false;
+         
+    }
+    else {
+        tileMap[_MousePositionGrid.x][_MousePositionGrid.y].SetSprite("Assets/Sprites/Flag.png");
+        tileMap[_MousePositionGrid.x][_MousePositionGrid.y].flag = true;
+    }
 }
 

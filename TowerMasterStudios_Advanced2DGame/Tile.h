@@ -19,6 +19,7 @@ public:
 	sf::Texture m_TileTexture;
 	sf::Sprite m_TileSprite;
 	Tile *m_Neighbours[8];
+	bool flag = false;
 	unsigned int ShowingMine = 0;
 	bool Active = true;
 	void ObjInTile(Controler* _ObjHandler, EnemyControler* _EnemyHandler);
@@ -28,5 +29,6 @@ public:
 	int m_MineCount = 0;
 	int m_TresureCount = 0;
 	void Update(int _showingMine);
+
 };
 

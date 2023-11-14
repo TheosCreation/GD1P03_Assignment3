@@ -20,6 +20,8 @@ class TileMap
 public:
 	std::vector<std::vector<Tile>> tileMap;
 	int mapSize = 0;
+	sf::Texture flag;
+	
 	TileMap(int _mapSize, float _gridSizeF);
 	void draw(sf::RenderWindow* _window);
 	void update(sf::View _view, Controler* _ctrl, EnemyControler* _ectrl);
